@@ -8,23 +8,23 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="tvId"
-            android:id="@+id/tvId"
-            android:layout_gravity="center_horizontal|right" />
-
-        <TextView
             android:layout_width="158dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="tvCash"
             android:id="@+id/tvCash"
             android:layout_marginLeft="2dp"
-            android:layout_marginRight="7dp"
             android:layout_gravity="right"
             android:gravity="right" />
+
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Ср"
+            android:id="@+id/tvPayDateWeekDay"
+            android:layout_marginLeft="15dp"
+            android:textIsSelectable="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="tvPayDate"
             android:id="@+id/tvPayDate"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="4dp"
             android:layout_weight="0.23" />
     </LinearLayout>
 
