@@ -4,11 +4,18 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="47dp"
-        android:text="New Text"
         android:id="@+id/textView"
-        android:layout_marginTop="51dp" />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:text="Список чеков"
+        android:textAppearance="@style/AppTheme"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:typeface="sans" />
 
     <ListView
         android:id="@+id/lvData"
