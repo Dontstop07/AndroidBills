@@ -37,7 +37,8 @@ public class BillActivity extends Activity implements OnClickListener {
 	private EditText etSum;
 	private Spinner sKind;
 	private EditText inputDesc;
-	static BillDto billDto;
+	public static int editMode = 0; //0 - добавление, 1 - редактирование
+	public static BillDto billDto;
 	static {
 		billDto = new BillDto();
 		billDto.cash = "0";
@@ -147,7 +148,14 @@ public class BillActivity extends Activity implements OnClickListener {
 			// Конец проверки
 	        Db db = new Db(this);
 	        db.open();
-            db.insert(billDto);
+	        if (editMode == 0) {
+	              	db.insert(billDto);
+	        } else {
+	        	db.edit(billDto);
+	        }
+	        
+            
+            // editMode = 0; //0 - добавление, 1 - редактирование
             db.close();
 
 			tvLastBill.setText("" + billDto.kind + " " + billDto.cash);
