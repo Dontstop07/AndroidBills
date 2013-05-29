@@ -10,21 +10,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="tvId"
-            android:id="@+id/tvId"
-            android:layout_gravity="center_horizontal|right" />
+            android:layout_weight="0.03"
+            android:text="Сумма =" 
+            android:paddingLeft="8dip"
+            android:textSize="17dip"/>
 
         <TextView
-            android:layout_width="158dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="tvCash"
             android:id="@+id/tvCash"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:gravity="right" />
+            android:gravity="right"
+            android:text="tvCash"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tvPayDateWeekDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="Ср"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textIsSelectable="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +39,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="tvPayDate"
             android:id="@+id/tvPayDate"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="4dp"
             android:layout_weight="0.23" />
     </LinearLayout>
 
@@ -46,7 +53,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="tvKind"
-            android:id="@+id/tvKind" />
+            android:id="@+id/tvKind" 
+            android:paddingLeft="10dip"/>
 
         <TextView
             android:layout_width="fill_parent"

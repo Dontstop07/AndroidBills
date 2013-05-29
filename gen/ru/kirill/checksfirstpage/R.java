@@ -37,15 +37,15 @@ public final class R {
         public static final int sExpType=0x7f08000d;
         public static final int scrollView=0x7f080008;
         public static final int textView=0x7f080006;
-        public static final int tvCash=0x7f080001;
+        public static final int tvCash=0x7f080000;
         public static final int tvDate=0x7f08000b;
         public static final int tvDesc=0x7f08000e;
         public static final int tvDescription=0x7f080005;
         public static final int tvExpType=0x7f08000c;
-        public static final int tvId=0x7f080000;
         public static final int tvKind=0x7f080004;
         public static final int tvLastBill=0x7f080012;
         public static final int tvPayDate=0x7f080002;
+        public static final int tvPayDateWeekDay=0x7f080001;
         public static final int tvSum=0x7f080009;
     }
     public static final class layout {

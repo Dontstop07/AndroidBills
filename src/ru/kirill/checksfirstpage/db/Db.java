@@ -38,18 +38,27 @@ public class Db {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Calendar calendar = new GregorianCalendar();
 
-    public void insert(BillDto dto) {
-        ContentValues cv = new ContentValues();
-        cv.put("pay_date", dateFormat.format(dto.payDate));
+    public void insert(BillDto billDto) {
+        mDb.insert("bills", null, getFilledContentValues(billDto));
+    }
+
+    public void edit(BillDto billDto) {
+		// TODO Auto-generated method stub
+    	mDb.update("bills", getFilledContentValues(billDto), "_id=?", new String[] {billDto.id});
+	}
+    
+	private ContentValues getFilledContentValues(BillDto dto) {
+		ContentValues cv = new ContentValues();
+		cv.put("pay_date", dateFormat.format(dto.payDate));
         cv.put("cash", dto.cash);
         cv.put("kind", dto.kind);
         cv.put("description", dto.description);
         cv.put("input_date", dateFormat.format(dto.payDate));
         calendar.setTime(dto.payDate);
         cv.put("pay_date_year_month", calendar.get(Calendar.YEAR) * 100 + calendar.get(Calendar.MONTH) + 1);
-        mDb.insert("bills", null, cv);
-    }
-
+        return cv;
+	}
+    
     public void clear() {
         mDb.execSQL("delete from bills");
     }
@@ -92,4 +101,6 @@ public class Db {
 
         }
     }
+
+	
 }
