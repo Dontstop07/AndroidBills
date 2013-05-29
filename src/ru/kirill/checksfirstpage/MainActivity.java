@@ -26,12 +26,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.main);
 
 		// найдем View-элементы
-		Log.d(TAG, "найдем View-элементы");
 		btnBill = (Button) findViewById(R.id.btnBill);
 		btnBillsList = (Button) findViewById(R.id.btnBillsList);
 
 		// присваиваем обработчик кнопкам
-		Log.d(TAG, "присваиваем обработчик кнопкам");
 		btnBill.setOnClickListener(this);
 		btnBillsList.setOnClickListener(this);
 	}
@@ -39,18 +37,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// по id определяем кнопку, вызвавшую этот обработчик
-		Log.d(TAG, "по id определяем кнопку, вызвавшую этот обработчик");
 		switch (v.getId()) {
 		case R.id.btnBill: {
 			// кнопка ОК
-			Log.d(TAG, "кнопка ОК");
-			Toast.makeText(this, "Нажата кнопка Добавить чек", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this, BillActivity.class);
 			startActivity(intent);
 			break; }
 		case R.id.btnBillsList: {
 			// кнопка Cancel
-			Toast.makeText(this, "Нажата кнопка Список чеков", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this, DbContentActivity.class);
 			startActivity(intent);
 			break; }

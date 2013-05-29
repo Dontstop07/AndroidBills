@@ -5,12 +5,11 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
+        android:layout_gravity="top|center_horizontal"
         android:text="Список чеков"
         android:textAppearance="@style/AppTheme"
         android:textSize="20dp"
@@ -21,7 +20,7 @@
         android:id="@+id/lvData"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:clickable="false"
+        android:clickable="true"
         android:fastScrollEnabled="true"
         android:footerDividersEnabled="true"
         android:headerDividersEnabled="true"
