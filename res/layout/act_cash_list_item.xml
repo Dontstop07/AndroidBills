@@ -8,14 +8,6 @@
         android:layout_height="wrap_content">
 
         <TextView
-<<<<<<< HEAD
-            android:layout_width="158dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="tvCash"
-            android:id="@+id/tvCash"
-            android:layout_marginLeft="2dp"
-=======
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.03"
@@ -27,7 +19,6 @@
             android:id="@+id/tvCash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
->>>>>>> 0c17e4072153d6de8a28542da2af39e9db0e8a97
             android:layout_gravity="right"
             android:gravity="right"
             android:text="tvCash"
