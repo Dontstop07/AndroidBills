@@ -6,14 +6,13 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.graphics.Color;
+import android.view.*;
+import android.widget.AdapterView;
 import ru.kirill.checksfirstpage.db.Db;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -26,6 +25,7 @@ public class DbContentActivity extends Activity {
     SimpleCursorAdapter scAdapter;
     Cursor cursor;
     private ListView lvData;
+    private static final int CM_DELETE_ID = 1;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +104,7 @@ public class DbContentActivity extends Activity {
                     }
                 }
 
-//			    vDatePay.setText(cursor.getString(idxPayDate));
+//       vDatePay.setText(cursor.getString(idxPayDate));
                 String sFormattedDate = dateFormatter[formatterIndex].format(calendar.getTime());
                 String sWeekDay = "";
                 int posSpace = sFormattedDate.indexOf(" ");
@@ -129,10 +129,31 @@ public class DbContentActivity extends Activity {
 
 
                 TextView vDescription = (TextView) view.findViewById(R.id.tvDescription);
-			    vDescription.setText(cursor.getString(idxDescription));
+                vDescription.setText(cursor.getString(idxDescription));
             }
         };
         lvData = (ListView) findViewById(R.id.lvData);
         lvData.setAdapter(scAdapter);
+        registerForContextMenu(lvData);
+    }
+
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(0, CM_DELETE_ID, 0, R.string.delete_record);
+    }
+
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getItemId() == CM_DELETE_ID) {
+            // получаем из пункта контекстного меню данные по пункту списка
+            AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            // извлекаем id записи и удаляем соответствующую запись в БД
+            db.delRec(acmi.id);
+            // обновляем курсор
+            cursor.requery();
+            return true;
+        }
+        return super.onContextItemSelected(item);
     }
 }
+

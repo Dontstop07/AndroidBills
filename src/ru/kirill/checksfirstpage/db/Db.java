@@ -58,7 +58,11 @@ public class Db {
         cv.put("pay_date_year_month", calendar.get(Calendar.YEAR) * 100 + calendar.get(Calendar.MONTH) + 1);
         return cv;
 	}
-    
+
+    public void delRec(long id) {
+        mDb.delete("bills", COLUMN_ID + " = " + id, null);
+    }
+
     public void clear() {
         mDb.execSQL("delete from bills");
     }
@@ -70,7 +74,7 @@ public class Db {
         }
     }
 
-    // получить все данные из таблицы DB_TABLE
+        // получить все данные из таблицы DB_TABLE
     public Cursor getAllData() {
         return mDb.query("bills", null, null, null, null, null, "pay_date, cash");
     }

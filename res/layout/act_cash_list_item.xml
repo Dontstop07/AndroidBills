@@ -22,25 +22,8 @@
             android:layout_gravity="right"
             android:gravity="right"
             android:text="tvCash"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/tvPayDateWeekDay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:text="Ср"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textIsSelectable="true" />
-
-        <TextView
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Ср"
-            android:id="@+id/tvPayDateWeekDay"
-            android:layout_marginLeft="15dp"
-            android:textIsSelectable="true"/>
+            android:layout_weight="0.31"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,12 +49,21 @@
             android:paddingLeft="10dip"/>
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="141dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="tvDescription"
             android:id="@+id/tvDescription"
             android:layout_marginLeft="11dp" />
+
+        <TextView
+            android:layout_width="25dp"
+            android:layout_height="fill_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Ср"
+            android:id="@+id/tvPayDateWeekDay"
+            android:layout_marginLeft="15dp"
+            android:textIsSelectable="true"/>
     </LinearLayout>
 
 </LinearLayout>
