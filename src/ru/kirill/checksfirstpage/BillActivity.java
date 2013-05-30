@@ -59,8 +59,13 @@ public class BillActivity extends Activity implements OnClickListener {
 		tvDate = (TextView) findViewById(R.id.tvDate);
 		SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
 		tvDate.setText(ft.format(billDto.payDate));
-		
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, expType);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 		sKind = (Spinner) findViewById(R.id.sExpType);
+        sKind.setPrompt("Вид затрат");
+        sKind.setAdapter(adapter);
 		for (int i = 0; i<expType.length; i++){
 			String s = expType[i];
 			if (billDto.kind.equals(s)) {
@@ -68,7 +73,7 @@ public class BillActivity extends Activity implements OnClickListener {
 				break;
 			}
 		}
-		
+
 		inputDesc = (EditText) findViewById(R.id.inputDesc);
 		inputDesc.setText(billDto.description);		
 		
@@ -77,27 +82,6 @@ public class BillActivity extends Activity implements OnClickListener {
 		btnSave = (Button) findViewById(R.id.btnSave);
 		btnSave.setOnClickListener(this);
 		// адаптер
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, expType);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-		Spinner spinner = (Spinner) findViewById(R.id.sExpType);
-		spinner.setAdapter(adapter);
-		// заголовок
-		spinner.setPrompt("Вид затрат");
-		// выделяем элемент 
-		spinner.setSelection(0);
-		// устанавливаем обработчик нажатия
-		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int position, long id) {
-				// показываем позиция нажатого элемента
-				Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
-			}
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-			}
-		});
 
 	}
 	@SuppressWarnings("deprecation")
