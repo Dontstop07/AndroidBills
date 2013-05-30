@@ -41,7 +41,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.btnBill: {
 			// кнопка ОК
 
-            BillActivity.editMode = 0;            Intent intent = new Intent(this, BillActivity.class);
+            BillActivity.editMode = 0;
+            Intent intent = new Intent(this, BillActivity.class);
 			startActivity(intent);
 			BillActivity.billDto.cash = "";
 			BillActivity.billDto.payDate = new Date();
