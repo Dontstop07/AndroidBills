@@ -149,7 +149,7 @@ public class BillActivity extends Activity implements OnClickListener {
 	        Db db = new Db(this);
 	        db.open();
 	        if (editMode == 0) {
-	              	db.insert(billDto);
+	            db.insert(billDto);
 	        } else {
 	        	db.edit(billDto);
 	        }

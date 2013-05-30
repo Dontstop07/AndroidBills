@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import android.content.Intent;
 import ru.kirill.checksfirstpage.db.Db;
 import android.app.Activity;
 import android.content.Context;
@@ -22,6 +23,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import ru.kirill.checksfirstpage.dto.BillDto;
 
 /**
  * Created by oleg on 25.05.13.
@@ -165,11 +167,20 @@ public class DbContentActivity extends Activity {
 		} else if (item.getItemId() == CM_EDIT_ID) {
 			// получаем из пункта контекстного меню данные по пункту списка 
 						AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
-						// извлекаем id записи и удаляем соответствующую запись в БД
-						Toast.makeText(this, "редактирование", Toast.LENGTH_SHORT).show();
-						// обновляем курсор
-						cursor.requery();
-						return true;
+            long id = acmi.id;
+            BillDto billDto = db.get(id);
+            BillActivity.billDto = billDto;
+            BillActivity.editMode = 1;
+            Intent intent = new Intent(this, BillActivity.class);
+            startActivity(intent);
+            // извлекаем id записи и удаляем соответствующую запись в БД
+            Toast.makeText(this, "редактирование", Toast.LENGTH_SHORT).show();
+
+            // обновляем курсор
+            // вероятно обновление курсора нужно поместить в обработчик события которое происходит
+            // когда текущее активити станет опять станет активным
+            cursor.requery();
+            return true;
 		}
 		return super.onContextItemSelected(item);
 	}

@@ -1,7 +1,9 @@
 package ru.kirill.checksfirstpage.db;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.kirill.checksfirstpage.dto.BillDto;
@@ -51,7 +53,35 @@ public class Db {
 		mDb.update("bills", getFilledContentValues(billDto), "_id=?", new String[] {billDto.id});
 	}
 
-	private ContentValues getFilledContentValues(BillDto dto) {
+    public BillDto get(long id) {
+        String[] whereParamaters = new String[] {""+id};
+        String where = "_id = ?"; // при выборе записей из таблицы bills
+                                  // вместо "вопросика" будет использовано
+                                  // значение находящееся в массиве whereParamaters
+        Cursor cursor = mDb.query("bills", null, where, whereParamaters, null, null, "pay_date, cash");
+        if(cursor.moveToNext() ) {
+            BillDto result = new BillDto();
+            //result.payDate = cursor.getString(cursor.getColumnIndex("pay_date"));
+            result.id = getField(cursor, "_id");
+            String sPayDate = getField(cursor, "pay_date");
+            try {
+                result.payDate = dateFormat.parse(sPayDate);
+            } catch (ParseException e) {
+                result.payDate = new Date(); // ToDo переделать на выбрасывание исключения и оповещение пользователя о ошибке
+            }
+            result.cash = getField(cursor, "cash");
+            result.kind = getField(cursor, "kind");
+            result.description = getField(cursor, "description");
+            return result;
+        }
+        return null;
+    }
+
+    private String getField(Cursor cursor, String fieldName) {
+        return cursor.getString(cursor.getColumnIndex(fieldName));
+    }
+
+    private ContentValues getFilledContentValues(BillDto dto) {
 		ContentValues cv = new ContentValues();
 		cv.put("pay_date", dateFormat.format(dto.payDate));
 		cv.put("cash", dto.cash);
@@ -75,11 +105,11 @@ public class Db {
 	}
 
 	// получить все данные из таблицы DB_TABLE
-	public Cursor getAllData() {
-		return mDb.query("bills", null, null, null, null, null, "pay_date, cash");
-	}
+    public Cursor getAllData() {
+        return mDb.query("bills", null, null, null, null, null, "pay_date, cash");
+    }
 
-	private class DBHelper extends SQLiteOpenHelper {
+    private class DBHelper extends SQLiteOpenHelper {
 		public DBHelper(Context ctx, String dbName, SQLiteDatabase.CursorFactory cursorFactory, int dbVersion)  {
 			super(ctx, dbName, cursorFactory, dbVersion);
 		}
