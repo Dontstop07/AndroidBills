@@ -41,7 +41,7 @@ public class BillActivity extends Activity implements OnClickListener {
 	public static BillDto billDto;
 	static {
 		billDto = new BillDto();
-		billDto.cash = "0";
+		billDto.cash = "";
 		billDto.payDate = new Date();
 		billDto.kind = expType[2];
 	}
@@ -164,9 +164,6 @@ public class BillActivity extends Activity implements OnClickListener {
 			etSum.setText(billDto.cash);
 			inputDesc.setText(billDto.description);
 			// кнопка ОК
-			break;
-		case R.id.btnCancel:
-			// кнопка Cancel
 			break;
 		}
 	}
