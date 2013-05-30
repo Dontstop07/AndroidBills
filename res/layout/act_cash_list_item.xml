@@ -20,7 +20,7 @@
             android:id="@+id/tvCash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_gravity="right"
             android:layout_marginLeft="4dp"
             android:gravity="left"
             android:text="tvCash"
@@ -37,7 +37,7 @@
             android:gravity="right"
             android:text="Ср"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textIsSelectable="true"
+            
             android:textSize="17sp"
             android:textStyle="normal" />
 

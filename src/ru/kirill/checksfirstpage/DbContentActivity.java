@@ -48,6 +48,9 @@ public class DbContentActivity extends Activity {
 		//        int[] to = new int[]{R.id.tvId, R.id.tvCash, R.id.tvPayDate, R.id.tvKind, R.id.tvDescription};
 
 		// создааем адаптер и настраиваем список
+        lvData = (ListView) findViewById(R.id.lvData);
+//      scAdapter = new SimpleCursorAdapter(this, R.layout.act_cash_list_item, cursor, from, to);
+
 		scAdapter = new SimpleCursorAdapter(this, R.layout.act_cash_list_item, cursor, new String[0], new int[0]) {
 			DecimalFormat df = new DecimalFormat("#.00");
 			{
