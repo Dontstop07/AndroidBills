@@ -165,9 +165,6 @@ public class BillActivity extends Activity implements OnClickListener {
 			inputDesc.setText(billDto.description);
 			// кнопка ОК
 			break;
-		case R.id.btnCancel:
-			// кнопка Cancel
-			break;
 		}
 	}
 }

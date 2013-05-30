@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +10,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:text="Сумма"
+        android:text="Сумма:"
         android:textSize="17dip" />
 
     <EditText
@@ -26,17 +25,32 @@
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="onclick"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:paddingTop="10dip"
-        android:text="Дата"
-        android:textSize="17dip" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:paddingTop="10dip"
+            android:text="Дата:"
+            android:textSize="17dip" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:clickable="true"
+            android:onClick="onclick"
+            android:paddingRight="10dip"
+            android:paddingTop="10dip"
+            android:text="Дата"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tvExpType"
@@ -45,13 +59,24 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:text="Вид затрат"
+        android:text="Вид затрат:"
         android:textSize="17dip" />
 
     <Spinner
         android:id="@+id/sExpType"
+        style="@style/AppBaseTheme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:textSize="17dip" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_margin="10dip"
+        android:text="Сохранить" />
 
     <TextView
         android:id="@+id/tvDesc"
@@ -60,7 +85,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:text="Описание чека"
+        android:text="Описание чека:"
         android:textSize="17dip" />
 
     <EditText
@@ -75,21 +100,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Сохранить"/>
-
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Отменить"/>
-
     </LinearLayout>
 
     <TextView
@@ -99,7 +109,7 @@
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
-        android:text="TextView" 
+        android:text="Последний введенный чек"
         android:textSize="17dip" />
 
 </LinearLayout>
