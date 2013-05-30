@@ -21,6 +21,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by oleg on 25.05.13.
@@ -31,6 +32,7 @@ public class DbContentActivity extends Activity {
 	Cursor cursor;
 	private ListView lvData;
 	private static final int CM_DELETE_ID = 1;
+	private static final int CM_EDIT_ID = 2;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -145,6 +147,7 @@ public class DbContentActivity extends Activity {
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		menu.add(0, CM_DELETE_ID, 0, R.string.delete_record);
+		menu.add(0, CM_EDIT_ID, 0, R.string.edit_record);
 	}
 
 	public boolean onContextItemSelected(MenuItem item) {
@@ -156,6 +159,14 @@ public class DbContentActivity extends Activity {
 			// обновляем курсор
 			cursor.requery();
 			return true;
+		} else if (item.getItemId() == CM_EDIT_ID) {
+			// получаем из пункта контекстного меню данные по пункту списка 
+						AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
+						// извлекаем id записи и удаляем соответствующую запись в БД
+						Toast.makeText(this, "редактирование", Toast.LENGTH_SHORT).show();
+						// обновляем курсор
+						cursor.requery();
+						return true;
 		}
 		return super.onContextItemSelected(item);
 	}
