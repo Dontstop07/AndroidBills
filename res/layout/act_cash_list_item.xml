@@ -14,7 +14,8 @@
             android:text="Сумма ="
             android:textSize="17dip"
             android:textStyle="normal"
-            android:typeface="sans" />
+            android:typeface="sans" 
+            android:textIsSelectable="true"/>
 
         <TextView
             android:id="@+id/tvCash"
@@ -26,7 +27,8 @@
             android:text="tvCash"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="17sp"
-            android:textStyle="normal" />
+            android:textStyle="normal" 
+            android:textIsSelectable="true"/>
 
         <TextView
             android:id="@+id/tvPayDateWeekDay"
@@ -39,7 +41,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             
             android:textSize="17sp"
-            android:textStyle="normal" />
+            android:textStyle="normal" 
+            />
 
         <TextView
             android:id="@+id/tvPayDate"
@@ -52,7 +55,8 @@
             android:text="tvPayDate"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="18sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:textIsSelectable="true" />
 
     </LinearLayout>
 
@@ -69,7 +73,8 @@
             android:text="tvKind"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="normal|bold"
-            android:typeface="sans" />
+            android:typeface="sans" 
+            android:textIsSelectable="true"/>
 
         <TextView
             android:id="@+id/tvDescription"
@@ -79,7 +84,8 @@
             android:text="tvDescription"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="normal"
-            android:typeface="sans" />
+            android:typeface="sans" 
+            android:textIsSelectable="true"/>
 
     </LinearLayout>
 

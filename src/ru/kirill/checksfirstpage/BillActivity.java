@@ -159,7 +159,7 @@ public class BillActivity extends Activity implements OnClickListener {
             db.close();
 
 			tvLastBill.setText("" + billDto.kind + " " + billDto.cash);
-			billDto.cash = "0";
+			billDto.cash = "";
 			billDto.description = "";
 			etSum.setText(billDto.cash);
 			inputDesc.setText(billDto.description);
