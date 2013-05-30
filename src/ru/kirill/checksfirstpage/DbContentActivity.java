@@ -43,15 +43,15 @@ public class DbContentActivity extends Activity {
         db = new Db(this);
         db.open();
 
-        // получаем курсор
+        // РїРѕР»СѓС‡Р°РµРј РєСѓСЂСЃРѕСЂ
         cursor = db.getAllData();
         startManagingCursor(cursor);
 
-        // формируем столбцы сопоставления
+        // С„РѕСЂРјРёСЂСѓРµРј СЃС‚РѕР»Р±С†С‹ СЃРѕРїРѕСЃС‚Р°РІР»РµРЅРёСЏ
         //        String[] from = new String[]{Db.COLUMN_ID, Db.COLUMN_CASH, Db.COLUMN_PAY_DATE, Db.COLUMN_KIND, Db.COLUMN_DESCRIPTION};
         //        int[] to = new int[]{R.id.tvId, R.id.tvCash, R.id.tvPayDate, R.id.tvKind, R.id.tvDescription};
 
-        // создааем адаптер и настраиваем список
+        // СЃРѕР·РґР°Р°РµРј Р°РґР°РїС‚РµСЂ Рё РЅР°СЃС‚СЂР°РёРІР°РµРј СЃРїРёСЃРѕРє
         lvData = (ListView) findViewById(R.id.lvData);
 //      scAdapter = new SimpleCursorAdapter(this, R.layout.act_cash_list_item, cursor, from, to);
 
@@ -131,8 +131,8 @@ public class DbContentActivity extends Activity {
                 TextView vPayDateWeekDay = (TextView) view.findViewById(R.id.tvPayDateWeekDay);
                 vPayDateWeekDay.setText(sWeekDay);
 
-                boolean vSb = calendar.get(Calendar.DAY_OF_WEEK) == 7; // Суббота
-                boolean vVs = calendar.get(Calendar.DAY_OF_WEEK) == 1; // Воскресение
+                boolean vSb = calendar.get(Calendar.DAY_OF_WEEK) == 7; // РЎСѓР±Р±РѕС‚Р°
+                boolean vVs = calendar.get(Calendar.DAY_OF_WEEK) == 1; // Р’РѕСЃРєСЂРµСЃРµРЅРёРµ
                 if(vSb || vVs) {
                     vPayDateWeekDay.setTextColor(weekEndColor);
                 } else {
@@ -157,15 +157,15 @@ public class DbContentActivity extends Activity {
 
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getItemId() == CM_DELETE_ID) {
-            // получаем из пункта контекстного меню данные по пункту списка
+            // РїРѕР»СѓС‡Р°РµРј РёР· РїСѓРЅРєС‚Р° РєРѕРЅС‚РµРєСЃС‚РЅРѕРіРѕ РјРµРЅСЋ РґР°РЅРЅС‹Рµ РїРѕ РїСѓРЅРєС‚Сѓ СЃРїРёСЃРєР°
             AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
-            // извлекаем id записи и удаляем соответствующую запись в БД
+            // РёР·РІР»РµРєР°РµРј id Р·Р°РїРёСЃРё Рё СѓРґР°Р»СЏРµРј СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ Р·Р°РїРёСЃСЊ РІ Р‘Р”
             db.delRec(acmi.id);
-            // обновляем курсор
+            // РѕР±РЅРѕРІР»СЏРµРј РєСѓСЂСЃРѕСЂ
             cursor.requery();
             return true;
         } else if (item.getItemId() == CM_EDIT_ID) {
-            // получаем из пункта контекстного меню данные по пункту списка
+            // РїРѕР»СѓС‡Р°РµРј РёР· РїСѓРЅРєС‚Р° РєРѕРЅС‚РµРєСЃС‚РЅРѕРіРѕ РјРµРЅСЋ РґР°РЅРЅС‹Рµ РїРѕ РїСѓРЅРєС‚Сѓ СЃРїРёСЃРєР°
             AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
             long id = acmi.id;
             BillDto billDto = db.get(id);
@@ -173,12 +173,12 @@ public class DbContentActivity extends Activity {
             BillActivity.editMode = 1;
             Intent intent = new Intent(this, BillActivity.class);
             startActivity(intent);
-            // извлекаем id записи и удаляем соответствующую запись в БД
-            Toast.makeText(this, "редактирование", Toast.LENGTH_SHORT).show();
+            // РёР·РІР»РµРєР°РµРј id Р·Р°РїРёСЃРё Рё СѓРґР°Р»СЏРµРј СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ Р·Р°РїРёСЃСЊ РІ Р‘Р”
+            Toast.makeText(this, "СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ", Toast.LENGTH_SHORT).show();
 
-            // обновляем курсор
-            // вероятно обновление курсора нужно поместить в обработчик события которое происходит
-            // когда текущее активити станет опять станет активным
+            // РѕР±РЅРѕРІР»СЏРµРј РєСѓСЂСЃРѕСЂ
+            // РІРµСЂРѕСЏС‚РЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ РєСѓСЂСЃРѕСЂР° РЅСѓР¶РЅРѕ РїРѕРјРµСЃС‚РёС‚СЊ РІ РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕР±С‹С‚РёСЏ РєРѕС‚РѕСЂРѕРµ РїСЂРѕРёСЃС…РѕРґРёС‚
+            // РєРѕРіРґР° С‚РµРєСѓС‰РµРµ Р°РєС‚РёРІРёС‚Рё СЃС‚Р°РЅРµС‚ РѕРїСЏС‚СЊ СЃС‚Р°РЅРµС‚ Р°РєС‚РёРІРЅС‹Рј
             cursor.requery();
             return true;
         }
