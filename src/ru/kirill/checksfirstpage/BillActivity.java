@@ -148,22 +148,22 @@ public class BillActivity extends Activity implements OnClickListener {
 			// Конец проверки
 	        Db db = new Db(this);
 	        db.open();
+            // editMode = 0; //0 - добавление, 1 - редактирование
 	        if (editMode == 0) {
 	            db.insert(billDto);
+                tvLastBill.setText("" + billDto.kind + " " + billDto.cash);
+                billDto.cash = "";
+                billDto.description = "";
+                etSum.setText(billDto.cash);
+                inputDesc.setText(billDto.description);
+                // кнопка ОК
 	        } else {
 	        	db.edit(billDto);
+                finish(); // закроем текущую activity
 	        }
-	        
-            
-            // editMode = 0; //0 - добавление, 1 - редактирование
+
             db.close();
 
-			tvLastBill.setText("" + billDto.kind + " " + billDto.cash);
-			billDto.cash = "";
-			billDto.description = "";
-			etSum.setText(billDto.cash);
-			inputDesc.setText(billDto.description);
-			// кнопка ОК
 			break;
 		}
 	}

@@ -69,7 +69,8 @@ public class Db {
             } catch (ParseException e) {
                 result.payDate = new Date(); // ToDo переделать на выбрасывание исключения и оповещение пользователя о ошибке
             }
-            result.cash = getField(cursor, "cash");
+
+            result.cash = Float.toString(getFieldFloat(cursor, "cash"));
             result.kind = getField(cursor, "kind");
             result.description = getField(cursor, "description");
             return result;
@@ -79,6 +80,10 @@ public class Db {
 
     private String getField(Cursor cursor, String fieldName) {
         return cursor.getString(cursor.getColumnIndex(fieldName));
+    }
+
+    private float getFieldFloat(Cursor cursor, String fieldName) {
+        return cursor.getFloat(cursor.getColumnIndex(fieldName));
     }
 
     private ContentValues getFilledContentValues(BillDto dto) {
