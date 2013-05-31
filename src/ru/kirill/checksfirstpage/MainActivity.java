@@ -40,12 +40,13 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btnBill: {
 			// кнопка ОК
-			
-			Intent intent = new Intent(this, BillActivity.class);
+
+            BillActivity.editMode = 0;
+            Intent intent = new Intent(this, BillActivity.class);
 			startActivity(intent);
 			BillActivity.billDto.cash = "";
 			BillActivity.billDto.payDate = new Date();
-			//BillActivity.billDto.kind = "";
+			BillActivity.billDto.kind = "";
 			BillActivity.billDto.description = "";	
 			
 			break; }

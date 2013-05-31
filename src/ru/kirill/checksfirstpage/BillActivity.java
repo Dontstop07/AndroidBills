@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import android.content.DialogInterface;
+import android.view.Gravity;
 import ru.kirill.checksfirstpage.db.Db;
 import ru.kirill.checksfirstpage.dto.BillDto;
 import android.app.Activity;
@@ -57,8 +59,7 @@ public class BillActivity extends Activity implements OnClickListener {
 		etSum.setText(billDto.cash);
 		
 		tvDate = (TextView) findViewById(R.id.tvDate);
-		SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
-		tvDate.setText(ft.format(billDto.payDate));
+        datePayDisplay();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, expType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,8 +85,21 @@ public class BillActivity extends Activity implements OnClickListener {
 		// адаптер
 
 	}
-	@SuppressWarnings("deprecation")
+
+    private void datePayDisplay() {
+        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+        tvDate.setText(ft.format(billDto.payDate));
+    }
+
+    DatePickerDialog tpd;
+    boolean myCallBackDatePicked;
+
+    @SuppressWarnings("deprecation")
 	public void onclick(View view) {
+        myCallBackDatePicked = false;
+        if(tpd != null) {
+            setDatePayInDateDialog();
+        }
 		showDialog(DIALOG_DATE);
 	}
 
@@ -93,22 +107,44 @@ public class BillActivity extends Activity implements OnClickListener {
 	@SuppressWarnings("deprecation")
 	protected Dialog onCreateDialog(int id) {
 		if (id == DIALOG_DATE) {
-			DatePickerDialog tpd = new DatePickerDialog(this, myCallBack, myYear, myMonth, myDay);
+            tpd = new DatePickerDialog(this, myCallBack, 1, 0, 1) {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    myCallBackDatePicked = true;
+                    super.onClick(dialog, which);
+                    myCallBackDatePicked = false;
+                }
+            };
+            setDatePayInDateDialog();
 			return tpd;
 		}
 		return super.onCreateDialog(id);
 	}
 
-	OnDateSetListener myCallBack = new OnDateSetListener() {
+    private void setDatePayInDateDialog() {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(billDto.payDate);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day  = calendar.get(Calendar.DAY_OF_MONTH);
+        tpd.updateDate(year, month, day);
+    }
+
+    OnDateSetListener myCallBack = new OnDateSetListener() {
 
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
+            if(! myCallBackDatePicked ) {
+                return;
+            }
 			Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 			billDto.payDate = calendar.getTime();
-			myYear = year;
-			myMonth = monthOfYear+1;
-			myDay = dayOfMonth;
-			tvDate.setText("" + myDay + "/" + myMonth + "/" + myYear);
+//			myYear = year;
+//			myMonth = monthOfYear+1;
+//			myDay = dayOfMonth;
+            datePayDisplay();
+//			tvDate.setText("" + myDay + "/" + myMonth + "/" + myYear);
 		}
 	};
 
@@ -122,11 +158,21 @@ public class BillActivity extends Activity implements OnClickListener {
 			billDto.kind = expType[sKind.getSelectedItemPosition()];
 			billDto.description = inputDesc.getText().toString();
 			// Начало проверки
-			float summa;
-			summa = Float.parseFloat(billDto.cash);
+			float summa=0;
+            try {
+                if( ! billDto.cash.isEmpty()) {
+                    summa = Float.parseFloat(billDto.cash);
+                }
+            } catch (NumberFormatException e) {
+                // Еслипроизойдёёт ошибка преобразования строки в число то значит сумма будет равна нулю
+                billDto.cash = "";
+                etSum.setText(billDto.cash);
+            }
 			if (summa > -0.01 && summa < 0.01) {
-				Toast toast = Toast.makeText(this, "сумма не должна равняться нулю", Toast.LENGTH_SHORT);
+				Toast toast = Toast.makeText(this, "Сумма не должна равняться нулю", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 0, 100);
 				toast.show();
+                etSum.requestFocus(); // Установим фокус ввода в поле суммы
 				return;
 			}
 			// Конец проверки
@@ -134,13 +180,14 @@ public class BillActivity extends Activity implements OnClickListener {
 	        db.open();
             // editMode = 0; //0 - добавление, 1 - редактирование
 	        if (editMode == 0) {
+                // кнопка ОК
 	            db.insert(billDto);
                 tvLastBill.setText("" + billDto.kind + " " + billDto.cash);
                 billDto.cash = "";
                 billDto.description = "";
                 etSum.setText(billDto.cash);
                 inputDesc.setText(billDto.description);
-                // кнопка ОК
+                etSum.requestFocus();  // Установим фокус ввода в поле суммы
 	        } else {
 	        	db.edit(billDto);
                 finish(); // закроем текущую activity
