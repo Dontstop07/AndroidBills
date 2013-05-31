@@ -22,7 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="BillActivity" android:label="Введите чек"></activity>
+        <activity android:name="BillActivity"
+                  android:label="Введите чек"
+                  android:windowSoftInputMode="stateVisible|adjustResize" >
+
+        </activity>
         <activity android:name="DbContentActivity"></activity>
     </application>
 
