@@ -150,8 +150,8 @@ public class Db {
     }
 
     //удалить запись
-    public void delRecKind(String id) {
-        mDb.delete("kinds", "_id=?", new String[] {id});
+    public void delRecKind(long id) {
+        mDb.delete("kinds", "_id=?", new String[] {""+id});
     }
 
     //получить список всех Kinds

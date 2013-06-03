@@ -1,19 +1,16 @@
 package ru.kirill.checksfirstpage;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,8 +29,17 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 	ArrayList<Map<String, Object>> kinds;
 	String[] expTypes = {"обед", "бензин", "еда", "одежда"};
     private Db db;
+    private static final int CM_DELETE_ID = 1;
+    private static final int CM_EDIT_ID = 2;
     SimpleCursorAdapter scAdapter;
     Cursor cursor;
+    public static int editMode = 0; //0 - добавление, 1 - редактирование
+    public static KindDto kindDto;
+    static {
+        kindDto = new KindDto();
+        kindDto.id = -1;
+        kindDto.name = "";
+    }
 
 
 
@@ -43,7 +49,6 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 
 		// найдем View-элементы
 		btnSaveKind = (Button) findViewById(R.id.btnSaveKind);
-
 		// присваиваем обработчик кнопкам
 		btnSaveKind.setOnClickListener(this);
 
@@ -65,6 +70,7 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
         db = new Db(this);
         db.open();
 
+
         // получаем курсор
         cursor = db.getAllKindData();
         startManagingCursor(cursor);
@@ -82,19 +88,36 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.add(0, 0, 0, R.string.edit_record);
+        menu.add(0, CM_DELETE_ID, 0, R.string.delete_record);
+        menu.add(0, CM_EDIT_ID, 0, R.string.edit_record);
 	}
 
 	public boolean onContextItemSelected(MenuItem item) {
-		/* if (item.getItemId() == CM_DELETE_ID) {
-		      // получаем из пункта контекстного меню данные по пункту списка 
-		      AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
-		      // извлекаем id записи и удаляем соответствующую запись в БД
-		      db.delRec(acmi.id);
-		      // обновляем курсор
-		      cursor.requery();
-		      return true;
-		    }*/
+        if (item.getItemId() == CM_DELETE_ID) {
+            // получаем из пункта контекстного меню данные по пункту списка
+            AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            // извлекаем id записи и удаляем соответствующую запись в БД
+            db.delRecKind(acmi.id);
+            // обновляем курсор
+            cursor.requery();
+            return true;
+        } else if (item.getItemId() == CM_EDIT_ID) {
+            // получаем из пункта контекстного меню данные по пункту списка
+            AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            long id = acmi.id;
+            kindDto = db.getKind(id);
+            EditText etNewKind = (EditText) findViewById(R.id.etNewKind);
+            etNewKind.setText(kindDto.name);
+            editMode = 1;
+            // извлекаем id записи и удаляем соответствующую запись в БД
+            Toast.makeText(this, "редактирование", Toast.LENGTH_SHORT).show();
+
+            // обновляем курсор
+            // вероятно обновление курсора нужно поместить в обработчик события которое происходит
+            // когда текущее активити станет опять станет активным
+            // cursor.requery();
+            return true;
+        }
 		return super.onContextItemSelected(item);
 	}
 	@Override
@@ -108,13 +131,30 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 		    //map.put(ATTRIBUTE_NAME_TEXT, etNewKind.getText());
 		    KindDto kindDto = new KindDto();
             kindDto.name = etNewKind.getText().toString();
-            db.insertKind(kindDto);
-		    // добавляем его в коллекцию
-		    //kinds.add(map);
+            if( kindDto.name.isEmpty()) {
+                Toast toast = Toast.makeText(this, "Сумма не должна равняться нулю", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 0, 100);
+                toast.show();
+                etNewKind.requestFocus(); // Установим фокус ввода в поле вида
+                return;
+            }
+            Toast.makeText(this, "Проверка прошла успешно", Toast.LENGTH_SHORT);
+                    if (editMode == 0) {
+                        db.insertKind(kindDto);
+                        kindDto.name = "";
+                        etNewKind.setText(kindDto.name);
+                        Toast.makeText(this, "Элемент добавлен", Toast.LENGTH_SHORT);
+                    } else {
+                        db.editKind(kindDto);
+                        Toast.makeText(this, "Элемент изменен", Toast.LENGTH_SHORT);
+                        kindDto.id = "-1";
+                        kindDto.name = "";
+                        editMode = 0;
+                    }
 		    // уведомляем, что данные изменились
             cursor.requery();
 		   // scAdapter.notifyDataSetChanged();
-		    Toast.makeText(this, "Элемент добавлен", Toast.LENGTH_SHORT);
+
 		}
 
 	}
