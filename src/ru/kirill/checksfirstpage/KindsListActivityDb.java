@@ -111,6 +111,7 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
             editMode = 1;
             // извлекаем id записи и удаляем соответствующую запись в БД
             Toast.makeText(this, "редактирование", Toast.LENGTH_SHORT).show();
+            etNewKind.requestFocus();
 
             // обновляем курсор
             // вероятно обновление курсора нужно поместить в обработчик события которое происходит
@@ -129,7 +130,6 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 			// создаем новый Map
 		    //Map<String, Object> map = new HashMap<String, Object>();
 		    //map.put(ATTRIBUTE_NAME_TEXT, etNewKind.getText());
-		    KindDto kindDto = new KindDto();
             kindDto.name = etNewKind.getText().toString();
             if( kindDto.name.isEmpty()) {
                 Toast toast = Toast.makeText(this, "Сумма не должна равняться нулю", Toast.LENGTH_SHORT);
