@@ -26,6 +26,13 @@
             android:layout_marginTop="25dip"
             android:text="Список чеков" >
         </Button>
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dip"
+            android:text="Выгрузить чеки на почту"/>
     </LinearLayout>
 
 </LinearLayout>

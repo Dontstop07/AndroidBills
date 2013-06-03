@@ -71,7 +71,7 @@ public class DbContentActivity extends Activity {
 
             int currentYear;
             int currentMonth;
-            String dateFormat[] = {"ccc dd", "ccc dd MMM", "ccc dd MMM yyyy"};
+            String dateFormat[] = {"ccc dd MMM", "ccc dd MMM yyyy"};
             SimpleDateFormat dateFormatter[];
             int weekEndColor = Color.parseColor("#cc2030");
 
@@ -104,16 +104,13 @@ public class DbContentActivity extends Activity {
                 //  yyyy mm dd
                 String[] sParts = sDatePay.split("(-| )");
                 int year = Integer.parseInt(sParts[0]);
-                int month = Integer.parseInt(sParts[1]);
+                int month = Integer.parseInt(sParts[1]) - 1;
                 int day = Integer.parseInt(sParts[2]);
                 Calendar calendar = new GregorianCalendar();
                 calendar.set(year, month, day);
-                int formatterIndex = 2;
+                int formatterIndex = 1;
                 if(year == currentYear) {
-                    formatterIndex = 1;
-                    if(month == currentMonth) {
-                        formatterIndex = 0;
-                    }
+                    formatterIndex = 0;
                 }
 
                 //			    vDatePay.setText(cursor.getString(idxPayDate));

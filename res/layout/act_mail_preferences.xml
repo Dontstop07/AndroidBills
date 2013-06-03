@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".MailPreferencesActivity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView">
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="1"
+            android:padding="10dp">
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                >
+
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="smtp сервер"
+                    android:id="@+id/textView"
+                    android:layout_gravity="left"/>
+
+                <EditText
+                    android:id="@+id/teSmtpAddress"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:layout_marginRight="16dp"/>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="smtp порт"
+                    android:id="@+id/textView"
+                    />
+
+                <EditText
+                    android:id="@+id/teSmtpPort"
+                    android:inputType="text|number"
+                    android:singleLine="true"
+                    android:numeric="integer"
+                    android:layout_marginRight="16dp"/>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                >
+
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="smtp имя (login)"
+                    android:id="@+id/textView"
+                    />
+
+                <EditText
+                    android:id="@+id/teSmtpLogin"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:layout_marginRight="16dp"
+                    />
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                >
+
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="smtp Пароль"
+                    android:id="@+id/textView"
+                    />
+
+                <EditText
+                    android:id="@+id/teSmtpPassword"
+                    android:inputType="text|textPassword"
+                    android:singleLine="true"
+                    android:password="true"
+                    android:layout_marginRight="16dp"/>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                >
+
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="email отправителя"
+                    android:id="@+id/textView"
+                    />
+
+                <EditText
+                    android:id="@+id/teSmtpSender"
+                    android:inputType="text|textEmailAddress"
+                    android:singleLine="true"
+                    android:layout_marginRight="16dp"/>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                >
+
+                <TextView
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="email получателя"
+                    android:id="@+id/textView"
+                    />
+
+                <EditText
+                    android:id="@+id/teSmtpReceiver"
+                    android:inputType="text|textEmailAddress"
+                    android:singleLine="true"
+                    android:layout_marginRight="16dp"/>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                >
+
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Сохранить"
+                    android:id="@+id/btSave"
+                    android:layout_span="2"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"/>
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>

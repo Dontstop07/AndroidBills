@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.UUID;
 
 import ru.kirill.checksfirstpage.dto.BillDto;
 import android.content.ContentValues;
@@ -62,17 +63,7 @@ public class Db {
         if(cursor.moveToNext() ) {
             BillDto result = new BillDto();
             //result.payDate = cursor.getString(cursor.getColumnIndex("pay_date"));
-            result.id = getField(cursor, "_id");
-            String sPayDate = getField(cursor, "pay_date");
-            try {
-                result.payDate = dateFormat.parse(sPayDate);
-            } catch (ParseException e) {
-                result.payDate = new Date(); // ToDo переделать на выбрасывание исключения и оповещение пользователя о ошибке
-            }
-
-            result.cash = Float.toString(getFieldFloat(cursor, "cash"));
-            result.kind = getField(cursor, "kind");
-            result.description = getField(cursor, "description");
+            fillBillFields(cursor, result);
             return result;
         }
         return null;
@@ -95,6 +86,10 @@ public class Db {
 		cv.put("input_date", dateFormat.format(dto.payDate));
 		calendar.setTime(dto.payDate);
 		cv.put("pay_date_year_month", calendar.get(Calendar.YEAR) * 100 + calendar.get(Calendar.MONTH) + 1);
+        if(dto.uuid == null || dto.uuid == null) {
+            dto.uuid = UUID.randomUUID().toString();
+        }
+        cv.put("uuid", dto.uuid);
 		return cv;
 	}
 
@@ -112,6 +107,21 @@ public class Db {
 	// получить все данные из таблицы DB_TABLE
     public Cursor getAllData() {
         return mDb.query("bills", null, null, null, null, null, "pay_date, cash");
+    }
+
+    public void fillBillFields(Cursor cursor, BillDto result) {
+        result.id = getField(cursor, "_id");
+        String sPayDate = getField(cursor, "pay_date");
+        try {
+            result.payDate = dateFormat.parse(sPayDate);
+        } catch (ParseException e) {
+            result.payDate = new Date(); // ToDo переделать на выбрасывание исключения и оповещение пользователя о ошибке
+        }
+
+        result.cash = Float.toString(getFieldFloat(cursor, "cash"));
+        result.kind = getField(cursor, "kind");
+        result.description = getField(cursor, "description");
+        result.uuid = getField(cursor, "uuid");
     }
 
     private class DBHelper extends SQLiteOpenHelper {

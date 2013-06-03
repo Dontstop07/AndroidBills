@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="android-mail">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/activation.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/additionnal.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/libs/src/mail/src/java" />
+      <root url="file://$PROJECT_DIR$/libs/src/activation/src/java" />
+      <root url="file://$PROJECT_DIR$/libs/src/additionnal/src" />
+    </SOURCES>
+  </library>
+</component>
