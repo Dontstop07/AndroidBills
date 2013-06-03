@@ -42,8 +42,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	@Override
-	public void onClick(View v) {
-		// по id определяем кнопку, вызвавшую этот обработчик
+    public void onClick(View v) {
+        // по id определяем кнопку, вызвавшую этот обработчик
         switch (v.getId()) {
             case R.id.btnBill: {
                 // кнопка ОК
@@ -62,19 +62,20 @@ public class MainActivity extends Activity implements OnClickListener {
                 Intent intent = new Intent(this, DbContentActivity.class);
                 startActivity(intent);
                 break; }
-		case R.id.btnKindsList: {
-			// кнопка Cancel
-			Intent intent = new Intent(this, KindsListActivityDb.class);
-			startActivity(intent);
-			break; }
-		}
+            case R.id.btnKindsList: {
+                // кнопка Cancel
+                Intent intent = new Intent(this, KindsListActivityDb.class);
+                startActivity(intent);
+                break;
+            }
             case R.id.btnSend: {
                 // кнопка Отправить чеки
                 Intent intent = new Intent(this, SendBillsActivity.class);
                 startActivity(intent);
-                break; }
+                break;
+            }
         }
-	}
+    }
 
 
 	@Override
