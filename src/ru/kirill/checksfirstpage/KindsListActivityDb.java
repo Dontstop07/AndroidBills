@@ -134,7 +134,7 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
             if( kindDto.name.isEmpty()) {
                 Toast toast = Toast.makeText(this, "Сумма не должна равняться нулю", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 0, 100);
-                toast.show()
+                toast.show();
                 etNewKind.requestFocus(); // Установим фокус ввода в поле вида
                 return;
             }
