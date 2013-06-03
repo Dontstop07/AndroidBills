@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.kirill.checksfirstpage.dto.BillDto;
+import ru.kirill.checksfirstpage.dto.KindDto;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -24,7 +26,7 @@ public class Db {
 	public static final String COLUMN_KIND = "kind";
 	private final Context ctx;
 	private DBHelper dbHelper;
-	private final int DB_VERSION = 1;
+	private final int DB_VERSION = 2;
 	private final String DB_NAME = "myDb";
 	private SQLiteDatabase mDb;
 
@@ -113,6 +115,58 @@ public class Db {
     public Cursor getAllData() {
         return mDb.query("bills", null, null, null, null, null, "pay_date, cash");
     }
+    public void beginTransaction() {
+        mDb.beginTransaction();
+    }
+
+    public void endTransaction() {
+        mDb.endTransaction();
+    }
+    // kinds
+    // создать запись
+    public void insertKind(KindDto kindDto) {
+        mDb.insert("kinds", null, getKindFilledContentValues(kindDto));
+    }
+    //получить запись
+    public KindDto getKind(long id) {
+        String[] whereParamaters = new String[] {""+id};
+        String where = "_id = ?"; // при выборе записей из таблицы bills
+        // вместо "вопросика" будет использовано
+        // значение находящееся в массиве whereParamaters
+        Cursor cursor = mDb.query("kinds", null, where, whereParamaters, null, null, "name");
+        if(cursor.moveToNext() ) {
+            KindDto result = new KindDto();
+            result.id = getField(cursor, "_id");
+            result.name = getField(cursor, "name");
+            return result;
+        }
+        return null;
+    }
+
+    //сохранить запись
+    public void editKind(KindDto kindDto) {
+        // TODO Auto-generated method stub
+        mDb.update("kinds", getKindFilledContentValues(kindDto), "_id=?", new String[] {kindDto.id});
+    }
+
+    //удалить запись
+    public void delRecKind(String id) {
+        mDb.delete("kinds", "_id=?", new String[] {id});
+    }
+
+    //получить список всех Kinds
+
+
+    public Cursor getAllKindData() {
+        return mDb.query("kinds", null, null, null, null, null, "name");
+    }
+
+    private ContentValues getKindFilledContentValues(KindDto dto) {
+        ContentValues cv = new ContentValues();
+        cv.put("name", dto.name);
+        return cv;
+    }
+
 
     private class DBHelper extends SQLiteOpenHelper {
 		public DBHelper(Context ctx, String dbName, SQLiteDatabase.CursorFactory cursorFactory, int dbVersion)  {
@@ -121,25 +175,42 @@ public class Db {
 
 		@Override
 		public void onCreate(SQLiteDatabase sqLiteDatabase) {
-			String DB_DDL =
-					" CREATE TABLE bills ( "
-							+ " _id INTEGER PRIMARY KEY AUTOINCREMENT, "
-							+ " pay_date DATE NOT NULL, "
-							+ " cash DECIMAL(15,2) NOT NULL DEFAULT 0, "
-							+ " kind VARCHAR(250) NOT NULL DEFAULT '', "
-							+ " description VARCHAR(250) DEFAULT '', "
-							+ " uuid VARCHAR(50), "
-							+ " input_date DATETIME default current_timestamp, "
-							+ " pay_date_year_month decimal(6) "
-							+ "); ";
-			sqLiteDatabase.execSQL(DB_DDL);
+            createBills(sqLiteDatabase);
+            createKinds(sqLiteDatabase);
 		}
 
-		@Override
+        private void createBills(SQLiteDatabase sqLiteDatabase) {
+            String DB_DDL =
+                    " CREATE TABLE bills ( "
+                            + " _id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                            + " pay_date DATE NOT NULL, "
+                            + " cash DECIMAL(15,2) NOT NULL DEFAULT 0, "
+                            + " kind VARCHAR(250) NOT NULL DEFAULT '', "
+                            + " description VARCHAR(250) DEFAULT '', "
+                            + " uuid VARCHAR(50), "
+                            + " input_date DATETIME default current_timestamp, "
+                            + " pay_date_year_month decimal(6) "
+                            + "); ";
+            sqLiteDatabase.execSQL(DB_DDL);
+        }
+
+        @Override
 		public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
+            if (i == 1 && i2 == 2) {
 
+                createKinds(sqLiteDatabase);
+            }
 		}
-	}
+
+        private void createKinds(SQLiteDatabase sqLiteDatabase) {
+            String DB_DDL =
+                    " CREATE TABLE kinds ( "
+                            + " _id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                            + " name VARCHAR(250) NOT NULL DEFAULT '' "
+                            + "); ";
+            sqLiteDatabase.execSQL(DB_DDL);
+        }
+    }
 
 
 }

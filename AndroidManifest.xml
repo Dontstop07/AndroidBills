@@ -28,6 +28,8 @@
 
         </activity>
         <activity android:name="DbContentActivity"></activity>
+        <activity android:name="KindsListActivity"></activity>
+        <activity android:name="KindsListActivityDb"></activity>
     </application>
 
 </manifest>

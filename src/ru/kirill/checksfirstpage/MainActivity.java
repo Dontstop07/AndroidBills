@@ -16,6 +16,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	TextView tvOut;
 	Button btnBill;
 	Button btnBillsList;
+	Button btnKindsList;
 
 	private static final String TAG = "myLogs";
 
@@ -28,10 +29,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		// найдем View-элементы
 		btnBill = (Button) findViewById(R.id.btnBill);
 		btnBillsList = (Button) findViewById(R.id.btnBillsList);
+		btnKindsList = (Button) findViewById(R.id.btnKindsList);
 
 		// присваиваем обработчик кнопкам
 		btnBill.setOnClickListener(this);
 		btnBillsList.setOnClickListener(this);
+		btnKindsList.setOnClickListener(this);
 	}
 
 	@Override
@@ -53,6 +56,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.btnBillsList: {
 			// кнопка Cancel
 			Intent intent = new Intent(this, DbContentActivity.class);
+			startActivity(intent);
+			break; }
+		case R.id.btnKindsList: {
+			// кнопка Cancel
+			Intent intent = new Intent(this, KindsListActivityDb.class);
 			startActivity(intent);
 			break; }
 		}

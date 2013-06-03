@@ -26,6 +26,14 @@
             android:layout_marginTop="25dip"
             android:text="Список чеков" >
         </Button>
+
+        <Button
+            android:id="@+id/btnKindsList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dip"
+            android:text="Список видов затрат" />
+
     </LinearLayout>
 
 </LinearLayout>
