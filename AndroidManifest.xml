@@ -41,6 +41,11 @@
         <activity android:name="SendBillsActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity android:name=".ReceiveBillsActivity"
+                  android:screenOrientation="portrait"
+                  android:label="Загрузить чеки с почтового сервера"
+            />
+
         <activity
             android:name=".MailPreferencesActivity"
             android:label="Настройки"

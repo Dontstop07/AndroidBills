@@ -20,6 +20,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	private static final String TAG = "myLogs";
     private Button btnSend;
+    private Button btnReceive;
 
     /** Called when the activity is first created. */
 	@Override
@@ -33,12 +34,15 @@ public class MainActivity extends Activity implements OnClickListener {
 		btnKindsList = (Button) findViewById(R.id.btnKindsList);
 
         btnSend = (Button) findViewById(R.id.btnSend);
+        btnReceive = (Button) findViewById(R.id.btnReceive);
+
 
 		// присваиваем обработчик кнопкам
 		btnBill.setOnClickListener(this);
         btnBillsList.setOnClickListener(this);
 		btnKindsList.setOnClickListener(this);
         btnSend.setOnClickListener(this);
+        btnReceive.setOnClickListener(this);
 	}
 
 	@Override
@@ -74,6 +78,13 @@ public class MainActivity extends Activity implements OnClickListener {
                 startActivity(intent);
                 break;
             }
+            case R.id.btnReceive: {
+                // кнопка Отправить чеки
+                Intent intent = new Intent(this, ReceiveBillsActivity.class);
+                startActivity(intent);
+                break;
+            }
+
         }
     }
 
