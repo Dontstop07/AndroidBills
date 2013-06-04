@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.UUID;
 
 import ru.kirill.checksfirstpage.dto.BillDto;
 import ru.kirill.checksfirstpage.dto.KindDto;
@@ -64,17 +65,7 @@ public class Db {
         if(cursor.moveToNext() ) {
             BillDto result = new BillDto();
             //result.payDate = cursor.getString(cursor.getColumnIndex("pay_date"));
-            result.id = getField(cursor, "_id");
-            String sPayDate = getField(cursor, "pay_date");
-            try {
-                result.payDate = dateFormat.parse(sPayDate);
-            } catch (ParseException e) {
-                result.payDate = new Date(); // ToDo переделать на выбрасывание исключения и оповещение пользователя о ошибке
-            }
-
-            result.cash = Float.toString(getFieldFloat(cursor, "cash"));
-            result.kind = getField(cursor, "kind");
-            result.description = getField(cursor, "description");
+            fillBillFields(cursor, result);
             return result;
         }
         return null;
@@ -97,6 +88,10 @@ public class Db {
 		cv.put("input_date", dateFormat.format(dto.payDate));
 		calendar.setTime(dto.payDate);
 		cv.put("pay_date_year_month", calendar.get(Calendar.YEAR) * 100 + calendar.get(Calendar.MONTH) + 1);
+        if(dto.uuid == null || dto.uuid == null) {
+            dto.uuid = UUID.randomUUID().toString();
+        }
+        cv.put("uuid", dto.uuid);
 		return cv;
 	}
 
@@ -117,6 +112,21 @@ public class Db {
     }
     public void beginTransaction() {
         mDb.beginTransaction();
+    }
+
+    public void fillBillFields(Cursor cursor, BillDto result) {
+        result.id = getField(cursor, "_id");
+        String sPayDate = getField(cursor, "pay_date");
+        try {
+            result.payDate = dateFormat.parse(sPayDate);
+        } catch (ParseException e) {
+            result.payDate = new Date(); // ToDo переделать на выбрасывание исключения и оповещение пользователя о ошибке
+        }
+
+        result.cash = Float.toString(getFieldFloat(cursor, "cash"));
+        result.kind = getField(cursor, "kind");
+        result.description = getField(cursor, "description");
+        result.uuid = getField(cursor, "uuid");
     }
 
     public void endTransaction() {
@@ -180,27 +190,27 @@ public class Db {
 		}
 
         private void createBills(SQLiteDatabase sqLiteDatabase) {
-            String DB_DDL =
-                    " CREATE TABLE bills ( "
-                            + " _id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                            + " pay_date DATE NOT NULL, "
-                            + " cash DECIMAL(15,2) NOT NULL DEFAULT 0, "
-                            + " kind VARCHAR(250) NOT NULL DEFAULT '', "
-                            + " description VARCHAR(250) DEFAULT '', "
-                            + " uuid VARCHAR(50), "
-                            + " input_date DATETIME default current_timestamp, "
-                            + " pay_date_year_month decimal(6) "
-                            + "); ";
-            sqLiteDatabase.execSQL(DB_DDL);
-        }
+			String DB_DDL =
+					" CREATE TABLE bills ( "
+							+ " _id INTEGER PRIMARY KEY AUTOINCREMENT, "
+							+ " pay_date DATE NOT NULL, "
+							+ " cash DECIMAL(15,2) NOT NULL DEFAULT 0, "
+							+ " kind VARCHAR(250) NOT NULL DEFAULT '', "
+							+ " description VARCHAR(250) DEFAULT '', "
+							+ " uuid VARCHAR(50), "
+							+ " input_date DATETIME default current_timestamp, "
+							+ " pay_date_year_month decimal(6) "
+							+ "); ";
+			sqLiteDatabase.execSQL(DB_DDL);
+		}
 
-        @Override
+		@Override
 		public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
             if (i == 1 && i2 == 2) {
 
                 createKinds(sqLiteDatabase);
-            }
 		}
+	}
 
         private void createKinds(SQLiteDatabase sqLiteDatabase) {
             String DB_DDL =

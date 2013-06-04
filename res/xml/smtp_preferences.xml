@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory
+      android:title="Smtp сервер">
+     <EditTextPreference
+         android:title="адрес"
+         android:summary="Адрес smtp сервера.\n Например: smtp.gmail.com"
+         android:key="smtpAddress"
+         />
+      <EditTextPreference
+          android:title="порт"
+          android:summary="Номер порта smtp сервера.\n Например: 465"
+          android:key="smtpPort"
+          android:numeric="integer"
+          />
+  </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Пользователь smtp сервера">
+        <EditTextPreference
+            android:title="login"
+            android:summary="идентификатор пользователя для регистрации на smtp сервере.\n Например: userName@gmail.com"
+            android:key="smtpUser"
+            />
+        <EditTextPreference
+            android:title="пароль"
+            android:summary="пароль для регистрации на smtp сервере"
+            android:key="smtpPassword"
+            android:password="true"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Информация для e-mail">
+        <EditTextPreference
+            android:title="отправитель"
+            android:summary="E-mail адрес отправителя.\n Например: userName@gmail.com"
+            android:key="smtpSender"
+            />
+        <EditTextPreference
+            android:title="получатель"
+            android:summary="E-mail адрес получателя.\n Например: userName@gmail.com"
+            android:key="smtpTo"
+            />
+    </PreferenceCategory>
+
+</PreferenceScreen>

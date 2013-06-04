@@ -9,5 +9,6 @@ public class BillDto {
 	public Date payDate;
 	public String kind;
 	public String description;
+    public String uuid;
 	
 }
