@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.view.Gravity;
 import ru.kirill.checksfirstpage.db.Db;
 import ru.kirill.checksfirstpage.dto.BillDto;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 public class BillActivity extends Activity implements OnClickListener {
 
 	static String[] expType = {"обед", "бензин", "еда", "одежда"};
+    String[] kinds;
 	TextView tvDate;
 	int DIALOG_DATE = 1;
 	int myYear = 2013;
@@ -39,20 +41,22 @@ public class BillActivity extends Activity implements OnClickListener {
 	private EditText etSum;
 	private Spinner sKind;
 	private EditText inputDesc;
+    private Db db;
+    Cursor cursor;
 	public static int editMode = 0; //0 - добавление, 1 - редактирование
 	public static BillDto billDto;
 	static {
 		billDto = new BillDto();
 		billDto.cash = "";
 		billDto.payDate = new Date();
-		billDto.kind = expType[2];
+		billDto.kind = "";
 	}
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.bill);
 
 		etSum = (EditText) findViewById(R.id.etSum);
@@ -61,14 +65,30 @@ public class BillActivity extends Activity implements OnClickListener {
 		tvDate = (TextView) findViewById(R.id.tvDate);
         datePayDisplay();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, expType);
+        db = new Db(this);
+        db.open();
+
+
+        cursor = db.getAllKindData();
+        kinds = new String[cursor.getCount()];
+        cursor.moveToFirst();
+
+            int nameColIndex = cursor.getColumnIndex("name");
+            int index = 0;
+            do {
+                kinds[index] = cursor.getString(nameColIndex);
+                index++;
+            } while (cursor.moveToNext());
+        billDto.kind = "1";
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, kinds);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		sKind = (Spinner) findViewById(R.id.sExpType);
         sKind.setPrompt("Вид затрат");
         sKind.setAdapter(adapter);
-		for (int i = 0; i<expType.length; i++){
-			String s = expType[i];
+		for (int i = 0; i<kinds.length; i++){
+			String s = kinds[i];
 			if (billDto.kind.equals(s)) {
 				sKind.setSelection(i);
 				break;
@@ -155,7 +175,7 @@ public class BillActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btnSave:
 			billDto.cash = etSum.getText().toString();
-			billDto.kind = expType[sKind.getSelectedItemPosition()];
+			billDto.kind = kinds[sKind.getSelectedItemPosition()];
 			billDto.description = inputDesc.getText().toString();
 			// Начало проверки
 			float summa=0;
@@ -176,8 +196,7 @@ public class BillActivity extends Activity implements OnClickListener {
 				return;
 			}
 			// Конец проверки
-	        Db db = new Db(this);
-	        db.open();
+
             // editMode = 0; //0 - добавление, 1 - редактирование
 	        if (editMode == 0) {
                 // кнопка ОК
@@ -193,11 +212,13 @@ public class BillActivity extends Activity implements OnClickListener {
                 finish(); // закроем текущую activity
 	        }
 
-            db.close();
+
 
 			break;
 		}
+
 	}
+
 }
 
 

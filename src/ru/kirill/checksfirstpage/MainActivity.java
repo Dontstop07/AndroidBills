@@ -79,7 +79,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 break;
             }
             case R.id.btnReceive: {
-                // кнопка Отправить чеки
+                // кнопка Получить чеки
                 Intent intent = new Intent(this, ReceiveBillsActivity.class);
                 startActivity(intent);
                 break;
@@ -95,6 +95,5 @@ public class MainActivity extends Activity implements OnClickListener {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
 }
 
