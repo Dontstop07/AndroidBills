@@ -18,10 +18,10 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Android 4.2.2 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android 3.2 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="android-support-v4" level="project" />
-    <orderEntry type="library" name="mail" level="project" />
+    <orderEntry type="library" name="android-mail" level="project" />
   </component>
 </module>
 

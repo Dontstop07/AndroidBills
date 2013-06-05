@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import ru.kirill.checksfirstpage.mail.MailPartsCreator;
+import ru.kirill.checksfirstpage.mail.receive.MailReceiveProperties;
+import ru.kirill.checksfirstpage.mail.receive.MailReceivePropertiesImpl;
 import ru.kirill.checksfirstpage.mail.send.Mail;
 import ru.kirill.checksfirstpage.mail.send.MailProperties;
 import ru.kirill.checksfirstpage.mail.send.MailSendProperties;
@@ -52,31 +54,20 @@ public class ReceiveBillsActivity extends Activity implements View.OnClickListen
     }
 
     private void receiveMail() {
-        final MailSendProperties mailProperties = MailProperties.getInstance(this.getBaseContext());
+        final MailReceiveProperties mailProperties = MailReceivePropertiesImpl.getInstance(this.getBaseContext());
 
-        if (mailProperties.isNotFilled()) {
-            Toast.makeText(this, "Заполните параметры в настройках",
+        if (mailProperties.isPop3NotFilled()) {
+            Toast.makeText(this, "Заполните параметры \"Pop3 сервер\" в настройках",
                            Toast.LENGTH_SHORT).show();
             return;
         }
 
-//        final Mail m = new Mail(mailProperties.getLoginName(),
-//                                mailProperties.getLoginPassword());
-//        m.setPort(""+mailProperties.getSMTPport());
-//        m.setHost(mailProperties.getSMTPServerAddress());
-//
-//        m.setTo(new String[]{mailProperties.getRecipient()});
-//        m.setFrom(mailProperties.getSender());
-//        m.setSubject(MailPartsCreator.getMessageSubject());
-//        m.setBody(MailPartsCreator.getMessageBody(this).toString());
-
         setLogText("");
 
         final Handler h = new Handler() {
-            int cnt = 0;
             @Override
             public void handleMessage(Message msg) {
-                addLogText(""+(cnt++) + ". "+  msg.getData().getString("msg"));
+                addLogText(msg.getData().getString("msg"));
             }
         };
 
@@ -88,23 +79,24 @@ public class ReceiveBillsActivity extends Activity implements View.OnClickListen
                 pop3props.setProperty("mail.pop3.socketFactory.class",
                                       "javax.net.ssl.SSLSocketFactory");
                 pop3props.setProperty("mail.pop3.socketFactory.fallback", "false");
-                pop3props.setProperty("mail.pop3.port", "995");
+                pop3props.setProperty("mail.pop3.port", ""+mailProperties.getPop3Port());
 
-                URLName url = new URLName("pop3", "pop.gmail.com", 995, "",
-                        "olegch70@gmail.com",
-                        "DimaLarisa3");
+                URLName url = new URLName("pop3", mailProperties.getPop3ServerAddress(),
+                                           mailProperties.getPop3Port(), "",
+                        mailProperties.getPop3LoginName(),
+                        mailProperties.getPop3LoginPassword());
 
                 Session session = Session.getInstance(pop3props, null);
                 Exception ex=null;
                 try {
                     Store store = session.getStore(url);
                     store.connect();
-                    Folder folder = store.getFolder("inbox");
+                    Folder folder = store.getFolder(mailProperties.getPop3Folder());
                     folder.open(Folder.READ_ONLY);
                     javax.mail.Message[] messages = folder.getMessages();
-                    int i = 0;
+                    int i = 1;
                     for(javax.mail.Message mesage: messages) {
-                        sendStringForLog(""+i + " " + mesage.getSubject(), h);
+                        sendStringForLog(""+i + ". " + mesage.getSubject(), h);
                         i++;
                     }
                     sendStringForLog("Чеки приняты успешно.", h);
@@ -118,7 +110,7 @@ public class ReceiveBillsActivity extends Activity implements View.OnClickListen
                 }
 
                 if(ex != null) {
-                    sendStringForLog("Ошибка. Чеки не ниняты.", h);
+                    sendStringForLog("Ошибка. Чеки не приняты.", h);
                     sendStringForLog(ex.toString(), h);
                 }
             }
