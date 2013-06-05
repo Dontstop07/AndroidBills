@@ -149,6 +149,7 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
                         Toast.makeText(this, "Элемент изменен", Toast.LENGTH_SHORT);
                         kindDto.id = "-1";
                         kindDto.name = "";
+                        etNewKind.setText(kindDto.name);
                         editMode = 0;
                     }
 		    // уведомляем, что данные изменились
