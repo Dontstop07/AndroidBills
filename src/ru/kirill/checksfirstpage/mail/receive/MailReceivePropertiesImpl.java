@@ -30,7 +30,7 @@ public class MailReceivePropertiesImpl {
 
             @Override
             public String getPop3Folder() {
-                return prefs.getString("pop3Folder", "INBOX");
+                return "INBOX";
             }
 
             @Override

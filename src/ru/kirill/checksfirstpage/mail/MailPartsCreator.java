@@ -17,24 +17,20 @@ public class MailPartsCreator {
     {
         return "BillsSystem;version=1.0;check.version=1.2";
     }
-    public static StringBuilder getMessageBody(Context ctx) {
+    public static StringBuilder getMessageBody(Context ctx, Db db, long[] ids) {
         StringBuilder sb = new StringBuilder();
-        Db db = new Db(ctx);
-        db.open();
 
-        // РїРѕР»СѓС‡Р°РµРј РєСѓСЂСЃРѕСЂ
+        // получаем курсор
 
-        BillDto bill = new BillDto();
-        Cursor cursor = db.getAllData();
-
-        sb.append("phone.IMEI=").append(UtilAndroid.getIMEI()).append("\n")
+        sb.append("phone.IMEI=").append(UtilAndroid.getIMEI(ctx)).append("\n")
                 .append("fields=date;cash;kind;description;uuid;inputdate\n")
                 .append("statistic::bills.count=")
-                .append(""+cursor.getCount()).append("\n");
+                .append(""+ids.length).append("\n");
         int i = 0;
         SimpleDateFormat dateFmt = new SimpleDateFormat("dd.MM.yyyy");
-        while (cursor.moveToNext()) {
-            db.fillBillFields(cursor, bill);
+
+        for(long id: ids) {
+            BillDto bill = db.get(id);
             sb.append("bill.npp=").append(Integer.toString(i)).append("::")
                     .append("bill.fields=")
                     .append(dateFmt.format(bill.payDate)).append(";")
@@ -45,9 +41,31 @@ public class MailPartsCreator {
                     .append("bill.inputDate").append("\n");
             i++;
         }
-        cursor.close();
-        db.close();
 
         return sb;
+    }
+
+
+    public static long[] getNewBillsIds(Context ctx) {
+        return getBillsIds(ctx, 0); // новые чеки
+    }
+
+    public static long[] getNotImportedAndEditedBillsIds(Context ctx) {
+        return getBillsIds(ctx, 1); // Чеки введённые на этом устройстве
+    }
+
+    public static long[] getBillsIds(Context ctx, int impExp) {
+        Db db = new Db(ctx);
+        db.open();
+        Cursor cursor = db.getData(impExp);
+        int idIdx = cursor.getColumnIndex("_id");
+        long[] result = new long[cursor.getCount()];
+        int i = 0;
+        while (cursor.moveToNext()) {
+            result[i++] = cursor.getLong(idIdx);
+        }
+        cursor.close();
+        db.close();
+        return result;
     }
 }

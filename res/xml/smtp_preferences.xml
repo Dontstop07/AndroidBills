@@ -75,14 +75,4 @@
             android:password="true"
             />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="Папка на сервере">
-        <EditTextPreference
-            android:title="название папки"
-            android:summary="Название папки из которой будут загружаться чеки.\n Например: INBOX"
-            android:key="pop3Folder"
-            android:defaultValue="INBOX"
-            />
-    </PreferenceCategory>
-
 </PreferenceScreen>
