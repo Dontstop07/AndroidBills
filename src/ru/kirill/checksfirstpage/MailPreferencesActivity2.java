@@ -1,6 +1,7 @@
 package ru.kirill.checksfirstpage;
 
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 
 /**

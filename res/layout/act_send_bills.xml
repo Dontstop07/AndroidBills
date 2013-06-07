@@ -10,12 +10,24 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Отправить чеки на почту"
+        android:text="Отправить новые чеки на почту"
         android:id="@+id/btnSend"
         android:layout_marginBottom="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Отправить все чеки на почту"
+        android:id="@+id/btnSendAll"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="btnSendAllOnClick"
+        />
 
     <Button
         android:layout_width="fill_parent"

@@ -49,6 +49,9 @@
             android:name=".MailPreferencesActivity2"
             android:label="Настройки"
             />
+
+        <activity android:name=".ReceiveBillsActivity"></activity>
+
     </application>
 
 </manifest>

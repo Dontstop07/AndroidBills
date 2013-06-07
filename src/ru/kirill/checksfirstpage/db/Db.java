@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
+import android.util.Log;
+import android.widget.Toast;
 import ru.kirill.checksfirstpage.dto.BillDto;
 import ru.kirill.checksfirstpage.dto.KindDto;
 
@@ -27,7 +29,7 @@ public class Db {
 	public static final String COLUMN_KIND = "kind";
 	private final Context ctx;
 	private DBHelper dbHelper;
-	private final int DB_VERSION = 2;
+	private final int DB_VERSION = 4;
 	private final String DB_NAME = "myDb";
 	private SQLiteDatabase mDb;
 
@@ -53,7 +55,9 @@ public class Db {
 
 	public void edit(BillDto billDto) {
 		// TODO Auto-generated method stub
-		mDb.update("bills", getFilledContentValues(billDto), "_id=?", new String[] {billDto.id});
+        ContentValues cv = getFilledContentValues(billDto);
+        cv.put("exp_imp", "0"); // - чек может быть выгружен на почту
+        mDb.update("bills", cv, "_id=?", new String[] {billDto.id});
 	}
 
     public BillDto get(long id) {
@@ -79,6 +83,10 @@ public class Db {
         return cursor.getFloat(cursor.getColumnIndex(fieldName));
     }
 
+    private int getFieldInt(Cursor cursor, String fieldName) {
+        return cursor.getInt(cursor.getColumnIndex(fieldName));
+    }
+
     private ContentValues getFilledContentValues(BillDto dto) {
 		ContentValues cv = new ContentValues();
 		cv.put("pay_date", dateFormat.format(dto.payDate));
@@ -92,6 +100,7 @@ public class Db {
             dto.uuid = UUID.randomUUID().toString();
         }
         cv.put("uuid", dto.uuid);
+        cv.put("exp_imp", dto.expImp);
 		return cv;
 	}
 
@@ -105,6 +114,19 @@ public class Db {
 			dbHelper.close();
 		}
 	}
+
+    // получить данные из таблицы DB_TABLE
+    public Cursor getData(int expImp) {
+        // 0 - новые
+        // 1 - новые и выгруженные
+        String where="";
+        if(expImp == 0) {
+            where = "exp_imp = 0";
+        } else if(expImp == 1) {
+            where = "exp_imp in (0, 1)";
+        }
+        return mDb.query("bills", null, where, null, null, null, "pay_date, cash");
+    }
 
 	// получить все данные из таблицы DB_TABLE
     public Cursor getAllData() {
@@ -127,6 +149,11 @@ public class Db {
         result.kind = getField(cursor, "kind");
         result.description = getField(cursor, "description");
         result.uuid = getField(cursor, "uuid");
+        result.expImp = getFieldInt(cursor, "exp_imp");
+    }
+
+    public void transactionSuccessful() {
+        mDb.setTransactionSuccessful();
     }
 
     public void endTransaction() {
@@ -144,13 +171,7 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("kinds", null, where, whereParamaters, null, null, "name");
-        if(cursor.moveToNext() ) {
-            KindDto result = new KindDto();
-            result.id = getField(cursor, "_id");
-            result.name = getField(cursor, "name");
-            return result;
-        }
-        return null;
+        return extractKindDto(cursor);
     }
 
     //сохранить запись
@@ -171,12 +192,52 @@ public class Db {
         return mDb.query("kinds", null, null, null, null, null, "name");
     }
 
+    public KindDto getKindByName(String name) {
+
+        String[] whereParamaters = new String[] {name.toUpperCase()};
+        String where = "upper (name) = ?"; // при выборе записей из таблицы bills
+        // вместо "вопросика" будет использовано
+        // значение находящееся в массиве whereParamaters
+        Cursor cursor = mDb.query("kinds", null, where, whereParamaters, null, null, "name");
+        return extractKindDto(cursor);
+       /* Cursor cursor = mDb.query("kinds", null, null, null, null, null, "name");
+        cursor.moveToFirst();
+        do {
+            (cursor.moveToNext() )
+            KindDto result = new KindDto();
+            result.name = getField(cursor, "name");
+        }*/
+
+    }
+
+    private KindDto extractKindDto(Cursor cursor) {
+        if(cursor.moveToNext() ) {
+            KindDto result = new KindDto();
+            result.id = getField(cursor, "_id");
+            result.name = getField(cursor, "name");
+            return result;
+        }
+        return null;
+    }
+
     private ContentValues getKindFilledContentValues(KindDto dto) {
         ContentValues cv = new ContentValues();
         cv.put("name", dto.name);
         return cv;
     }
 
+    public void setSended(long id) {
+        setExpImp(id, 1); // 1 - отправлен
+    }
+
+    private void setExpImp(long id, int expImp) {
+        ContentValues cv = new ContentValues();
+        cv.put("exp_imp", expImp);
+        int cnt = mDb.update("bills", cv, "_id="+id, null);
+        if(cnt != 1) {
+            throw new IllegalStateException("Таблица bills. Запись не найдена. _id = " + id);
+        }
+    }
 
     private class DBHelper extends SQLiteOpenHelper {
 		public DBHelper(Context ctx, String dbName, SQLiteDatabase.CursorFactory cursorFactory, int dbVersion)  {
@@ -199,18 +260,37 @@ public class Db {
 							+ " description VARCHAR(250) DEFAULT '', "
 							+ " uuid VARCHAR(50), "
 							+ " input_date DATETIME default current_timestamp, "
-							+ " pay_date_year_month decimal(6) "
+							+ " pay_date_year_month decimal(6), "
+							+ " exp_imp decimal(1) default 0"
 							+ "); ";
 			sqLiteDatabase.execSQL(DB_DDL);
 		}
 
 		@Override
-		public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
-            if (i == 1 && i2 == 2) {
-
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+            if (oldVersion == 1 && newVersion == 2) {
                 createKinds(sqLiteDatabase);
-		}
-	}
+            }
+            if (oldVersion == 2 && newVersion == 3) {
+                billsAddExpImp(sqLiteDatabase);
+            }
+            if (oldVersion == 3 && newVersion == 4) {
+                billsAddExpImp(sqLiteDatabase);
+            }
+        }
+
+        private void billsAddExpImp(SQLiteDatabase sqLiteDatabase) {
+            String DB_DDL =
+                    " ALTER TABLE bills "
+                            + " add  "
+                            + " exp_imp decimal(1) default 0"
+                            + "; ";
+            try {
+                sqLiteDatabase.execSQL(DB_DDL);
+            } catch (Exception ex) {
+                Log.e("", ex.toString());
+            }
+        }
 
         private void createKinds(SQLiteDatabase sqLiteDatabase) {
             String DB_DDL =

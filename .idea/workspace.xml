@@ -13,29 +13,31 @@
     </shared>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java" line="162" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java" line="183" mnemonic="2" />
     <bookmark url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivityDb.java" line="96" mnemonic="1" />
     <bookmark url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivityDb.java" line="107" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85a61276-00ae-44af-9d3a-78178fc64bb3" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/dto/BillDto.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/dto/BillDto.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/DbContentActivity.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/DbContentActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivityDb.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivityDb.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/Mail.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/Mail.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/MailPartsCreator.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/MailPartsCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MailPreferencesActivity2.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MailPreferencesActivity2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/SendBillsActivity.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/SendBillsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/util/UtilAndroid.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/util/UtilAndroid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/act_cash_list_item.xml" afterPath="$PROJECT_DIR$/res/layout/act_cash_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/act_send_bills.xml" afterPath="$PROJECT_DIR$/res/layout/act_send_bills.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/smtp_preferences.xml" afterPath="$PROJECT_DIR$/res/xml/smtp_preferences.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ChecksMainPage.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370421792644" ignored="false" />
-    <file path="/Db.java" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370257893296" ignored="false" />
-    <file path="/KindDto.java" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370098479032" ignored="false" />
-    <file path="/fragment.java" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370341180339" ignored="false" />
-    <file path="/KindsListActivityDb.java" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370283756699" ignored="false" />
-    <file path="/AndroidManifest.xml" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370099229097" ignored="false" />
-    <file path="/MainActivity.java" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370099265374" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370340889250" ignored="false" />
-    <file path="$PROJECT_DIR$/../check_full_project_from_oleg/AndroidManifest.xml" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370341526126" ignored="false" />
-    <file path="$PROJECT_DIR$/../check_full_project_from_oleg/.idea/workspace.xml" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370345427755" ignored="false" />
-    <file path="$PROJECT_DIR$/../check_full_project_from_oleg/res/menu/main.xml" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370344449597" ignored="false" />
-    <file path="/BillActivity.java" changelist="85a61276-00ae-44af-9d3a-78178fc64bb3" time="1370355445641" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +52,39 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" line="66" class="ru.kirill.checksfirstpage.MainActivity" package="ru.kirill.checksfirstpage">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java" line="75" class="ru.kirill.checksfirstpage.BillActivity" package="ru.kirill.checksfirstpage">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -86,54 +121,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" line="62" class="ru.kirill.checksfirstpage.MainActivity" package="ru.kirill.checksfirstpage">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java" line="158" class="ru.kirill.checksfirstpage.db.Db" package="ru.kirill.checksfirstpage.db">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java" line="75" class="ru.kirill.checksfirstpage.BillActivity" package="ru.kirill.checksfirstpage">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -143,67 +130,85 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="KindsListActivityDb.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivityDb.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="149" column="42" selection-start="5520" selection-end="5520" vertical-scroll-proportion="0.59799">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DbContentActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/DbContentActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="13" selection-start="887" selection-end="887" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MailPreferencesActivity2.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MailPreferencesActivity2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="51" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="43" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MailPreferencesActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MailPreferencesActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="13" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SendBillsActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/SendBillsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="71" selection-start="3307" selection-end="3307" vertical-scroll-proportion="0.0">
+            <state line="141" column="0" selection-start="5177" selection-end="5177" vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="2703">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bill.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/bill.xml">
+      <file leaf-file-name="Mail.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/Mail.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="225" column="5" selection-start="6040" selection-end="6040" vertical-scroll-proportion="0.0" vertical-offset="3808" max-vertical-offset="4233">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MailProperties.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/MailProperties.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="0" selection-start="1588" selection-end="1588" vertical-scroll-proportion="0.0" vertical-offset="697" max-vertical-offset="1207">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MailSender.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/MailSender.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="169" column="5" selection-start="0" selection-end="5704" vertical-scroll-proportion="0.0" vertical-offset="2856" max-vertical-offset="3315">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MailSendProperties.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/MailSendProperties.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="0" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="391">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MailPartsCreator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/MailPartsCreator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="27" selection-start="1035" selection-end="1035" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1309">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+          <provider editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
+              <folding />
+            </state>
+          </provider>
           <provider selected="true" editor-type-id="android-designer">
             <state />
           </provider>
-          <provider editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        </entry>
+      </file>
+      <file leaf-file-name="Db.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="200" column="30" selection-start="6673" selection-end="6673" vertical-scroll-proportion="0.21356784" vertical-offset="3043" max-vertical-offset="5032">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KindsListActivityDb.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivityDb.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="119" column="0" selection-start="4103" selection-end="4103" vertical-scroll-proportion="0.0" vertical-offset="1717" max-vertical-offset="2907">
               <folding />
             </state>
           </provider>
@@ -212,28 +217,7 @@
       <file leaf-file-name="BillActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="28" selection-start="2133" selection-end="2133" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kindslist.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/kindslist.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Db.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="5" selection-start="5829" selection-end="5829" vertical-scroll-proportion="0.0">
+            <state line="213" column="0" selection-start="6528" selection-end="6528" vertical-scroll-proportion="0.0" vertical-offset="1488" max-vertical-offset="3417">
               <folding />
             </state>
           </provider>
@@ -257,20 +241,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/dto/KindDto.java" />
-        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivity.java" />
-        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/MailSendProperties.java" />
-        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/util/UtilAndroid.java" />
-        <option value="$PROJECT_DIR$/res/AndroidBills.iml" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java" />
+        <option value="$PROJECT_DIR$/res/layout/act_cash_list_item.xml" />
+        <option value="$PROJECT_DIR$/res/layout/act_send_bills.xml" />
+        <option value="$PROJECT_DIR$/res/xml/smtp_preferences.xml" />
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/dto/BillDto.java" />
-        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/Mail.java" />
-        <option value="$PROJECT_DIR$/res/layout/main.xml" />
-        <option value="$PROJECT_DIR$/res/menu/main.xml" />
+        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/util/UtilAndroid.java" />
+        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/DbContentActivity.java" />
+        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MailPreferencesActivity2.java" />
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/SendBillsActivity.java" />
-        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java" />
+        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/RecieveBillsActivity.java" />
+        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/ReceiveBillsActivity.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/Mail.java" />
+        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/MailPartsCreator.java" />
+        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java" />
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivityDb.java" />
       </list>
     </option>
@@ -307,7 +292,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -366,7 +350,73 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="mail" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChecksMainPage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChecksMainPage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="checksfirstpage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mail" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="send" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChecksMainPage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChecksMainPage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="checksfirstpage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChecksMainPage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChecksMainPage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xml" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -405,20 +455,21 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="MemberChooser.sorted" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Gmail (1)/activation.jar!/" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
-    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RecentsManager">
@@ -583,11 +634,13 @@
       <workItem from="1370340875700" duration="5060000" />
       <workItem from="1370346162730" duration="7241000" />
       <workItem from="1370421779269" duration="761000" />
+      <workItem from="1370505024542" duration="2901000" />
+      <workItem from="1370599313456" duration="29000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35815000" />
+    <option name="totallyTimeSpent" value="38745000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -611,25 +664,25 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287879" sideWeight="0.6012759" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287879" sideWeight="0.6012759" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32613552" sideWeight="0.6012759" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32613552" sideWeight="0.6012759" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39872408" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32591414" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32535884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.6012759" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24545455" sideWeight="0.67623603" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32376397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16818182" sideWeight="0.67623603" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.67623603" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -651,18 +704,18 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39872408" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.6012759" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24318182" sideWeight="0.6012759" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32854864" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32854864" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -726,115 +779,111 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/util/UtilAndroid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="35" selection-start="1315" selection-end="1315" vertical-scroll-proportion="-24.48">
-          <folding />
-        </state>
+        <state line="12" column="22" selection-start="384" selection-end="384" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/Mail.java">
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/DbContentActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="720" selection-end="720" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/ru/kirill/checksfirstpage/Manifest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/xml/smtp_preferences.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ChecksMainPage.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="7" selection-start="76" selection-end="76" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="43" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="175" column="31" selection-start="7536" selection-end="7536" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MailPreferencesActivity2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="51" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
+        <state line="12" column="37" selection-start="362" selection-end="362" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="74" selection-start="2486" selection-end="2486" vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="1785">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MailPreferencesActivity.java">
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
+        <state line="52" column="66" selection-start="1899" selection-end="1899" vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/ReceiveBillsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="9" selection-start="1631" selection-end="1631" vertical-scroll-proportion="0.0" vertical-offset="748" max-vertical-offset="2465">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/SendBillsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="71" selection-start="3307" selection-end="3307" vertical-scroll-proportion="0.0">
+        <state line="141" column="0" selection-start="5177" selection-end="5177" vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="2703">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/bill.xml">
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/Mail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="225" column="5" selection-start="6040" selection-end="6040" vertical-scroll-proportion="0.0" vertical-offset="3808" max-vertical-offset="4233">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/MailProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="0" selection-start="1588" selection-end="1588" vertical-scroll-proportion="0.0" vertical-offset="697" max-vertical-offset="1207">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/MailSender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="169" column="5" selection-start="0" selection-end="5704" vertical-scroll-proportion="0.0" vertical-offset="2856" max-vertical-offset="3315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/send/MailSendProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="391">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/MailPartsCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="27" selection-start="1035" selection-end="1035" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1309">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969">
+          <folding />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/DbContentActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="13" selection-start="887" selection-end="887" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="5" selection-start="5829" selection-end="5829" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="28" selection-start="2133" selection-end="2133" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/kindslist.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="213" column="0" selection-start="6528" selection-end="6528" vertical-scroll-proportion="0.0" vertical-offset="1488" max-vertical-offset="3417">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivityDb.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="42" selection-start="5520" selection-end="5520" vertical-scroll-proportion="0.59799">
+        <state line="119" column="0" selection-start="4103" selection-end="4103" vertical-scroll-proportion="0.0" vertical-offset="1717" max-vertical-offset="2907">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="200" column="30" selection-start="6673" selection-end="6673" vertical-scroll-proportion="0.21356784" vertical-offset="3043" max-vertical-offset="5032">
           <folding />
         </state>
       </provider>

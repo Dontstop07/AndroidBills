@@ -2,7 +2,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
   <PreferenceCategory
-      android:title="Smtp сервер">
+      android:title="Smtp сервер. Выгрузка чеков">
      <EditTextPreference
          android:title="адрес"
          android:summary="Адрес smtp сервера.\n Например: smtp.gmail.com"
@@ -42,5 +42,37 @@
             android:key="smtpTo"
             />
     </PreferenceCategory>
-
+    <PreferenceCategory
+        android:title="Pop3 сервер. Загрузка чеков">
+        <EditTextPreference
+            android:title="адрес"
+            android:summary="Адрес pop3 сервера.\n Например: pop.gmail.com"
+            android:key="pop3Address"
+            />
+        <EditTextPreference
+            android:title="порт (SSL/TLS)"
+            android:summary="Номер порта pop3 сервера (SSL/TLS).\n Например: 995"
+            android:key="pop3Port"
+            android:numeric="integer"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Пользователь pop3 сервера">
+        <CheckBoxPreference
+            android:title="login и пароль совпадает с smtp"
+            android:summary="для регистрации на pop3 сервере будут использованы идентификатор и пароль указанные в разделе smtp."
+            android:key="useSmtpLoginAndPasswordInPop3"
+            />
+        <EditTextPreference
+            android:title="login"
+            android:summary="идентификатор пользователя для регистрации на pop3 сервере.\n Например: userName@gmail.com"
+            android:key="pop3User"
+            />
+        <EditTextPreference
+            android:title="пароль"
+            android:summary="пароль для регистрации на pop3 сервере"
+            android:key="pop3Password"
+            android:password="true"
+            />
+    </PreferenceCategory>
 </PreferenceScreen>
