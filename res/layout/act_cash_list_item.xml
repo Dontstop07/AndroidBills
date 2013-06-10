@@ -43,7 +43,7 @@
             android:gravity="right"
             android:text="Ср"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            
+
             android:textSize="17sp"
             android:textStyle="normal" 
             />

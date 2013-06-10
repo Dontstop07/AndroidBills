@@ -130,9 +130,25 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 			// создаем новый Map
 		    //Map<String, Object> map = new HashMap<String, Object>();
 		    //map.put(ATTRIBUTE_NAME_TEXT, etNewKind.getText());
+            String message = null;
             kindDto.name = etNewKind.getText().toString();
             if( kindDto.name.isEmpty()) {
-                Toast toast = Toast.makeText(this, "Сумма не должна равняться нулю", Toast.LENGTH_SHORT);
+                message = "введите название";
+            } else {
+                if (editMode == 1) {
+                    KindDto oldValue = db.getKind(Long.parseLong(kindDto.id));
+                    if(oldValue.name.equals(kindDto.name)) {
+                        сlearKindDto(etNewKind);
+                        return;
+                    }
+                }
+                KindDto dublicate = db.getKindByName(kindDto.name);
+                if (dublicate != null) {
+                    message = "такое название уже существует";
+                }
+            }
+            if (message != null) {
+                Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 0, 100);
                 toast.show();
                 etNewKind.requestFocus(); // Установим фокус ввода в поле вида
@@ -141,16 +157,13 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
             Toast.makeText(this, "Проверка прошла успешно", Toast.LENGTH_SHORT);
                     if (editMode == 0) {
                         db.insertKind(kindDto);
-                        kindDto.name = "";
-                        etNewKind.setText(kindDto.name);
+                        сlearKindDto(etNewKind);
                         Toast.makeText(this, "Элемент добавлен", Toast.LENGTH_SHORT);
                     } else {
                         db.editKind(kindDto);
                         Toast.makeText(this, "Элемент изменен", Toast.LENGTH_SHORT);
-                        kindDto.id = "-1";
-                        kindDto.name = "";
-                        etNewKind.setText(kindDto.name);
-                        editMode = 0;
+                        сlearKindDto(etNewKind);
+
                     }
 		    // уведомляем, что данные изменились
             cursor.requery();
@@ -159,4 +172,11 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 		}
 
 	}
+
+    private void сlearKindDto(EditText etNewKind) {
+        kindDto.id = "-1";
+        kindDto.name = "";
+        etNewKind.setText(kindDto.name);
+        editMode = 0;
+    }
 }
