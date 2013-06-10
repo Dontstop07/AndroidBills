@@ -15,6 +15,10 @@ import ru.kirill.checksfirstpage.mail.send.Mail;
 import ru.kirill.checksfirstpage.mail.send.MailProperties;
 import ru.kirill.checksfirstpage.mail.send.MailSendProperties;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 /**
  * Created by oleg on 01.06.13.
  */
