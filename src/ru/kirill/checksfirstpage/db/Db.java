@@ -250,6 +250,11 @@ public class Db {
         }
     }
 
+    // ToDo произвести слияние с версией Кирилла
+    public KindDto getKindByName(String name) {
+        return null;
+    }
+
     private class DBHelper extends SQLiteOpenHelper {
 		public DBHelper(Context ctx, String dbName, SQLiteDatabase.CursorFactory cursorFactory, int dbVersion)  {
 			super(ctx, dbName, cursorFactory, dbVersion);

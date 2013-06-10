@@ -90,7 +90,7 @@ public class BillActivity extends Activity implements OnClickListener {
 			}
 		}
 
-        if(selection == -1) {
+        if(selection == -1 && billDto.kind != null && ! billDto.kind.trim().equals("")) {
             String[] expandedKinds = Arrays.copyOf(kinds, kinds.length+1, String[].class);
             expandedKinds[expandedKinds.length-1] = billDto.kind;
             selection = expandedKinds.length-1;
