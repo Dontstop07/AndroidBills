@@ -47,6 +47,12 @@ public class DbContentActivity extends Activity {
         cursor = db.getAllData();
         startManagingCursor(cursor);
 
+        final int idxCash = cursor.getColumnIndex(Db.COLUMN_CASH);
+        final int idxKind = cursor.getColumnIndex(Db.COLUMN_KIND);
+        final int idxPayDate = cursor.getColumnIndex(Db.COLUMN_PAY_DATE);
+        final int idxDescription = cursor.getColumnIndex(Db.COLUMN_DESCRIPTION);
+        final int idxExpImp = cursor.getColumnIndex(Db.COLUMN_EXP_IMP);
+
         // формируем столбцы сопоставления
         //        String[] from = new String[]{Db.COLUMN_ID, Db.COLUMN_CASH, Db.COLUMN_PAY_DATE, Db.COLUMN_KIND, Db.COLUMN_DESCRIPTION};
         //        int[] to = new int[]{R.id.tvId, R.id.tvCash, R.id.tvPayDate, R.id.tvKind, R.id.tvDescription};
@@ -88,10 +94,6 @@ public class DbContentActivity extends Activity {
 
             @Override
             public void bindView(View view, Context context, Cursor cursor) {
-                int idxCash = cursor.getColumnIndex(Db.COLUMN_CASH);
-                int idxKind = cursor.getColumnIndex(Db.COLUMN_KIND);
-                int idxPayDate = cursor.getColumnIndex(Db.COLUMN_PAY_DATE);
-                int idxDescription = cursor.getColumnIndex(Db.COLUMN_DESCRIPTION);
 
                 TextView vCash = (TextView) view.findViewById(R.id.tvCash);
                 vCash.setText(df.format(cursor.getFloat(idxCash)));
@@ -136,9 +138,8 @@ public class DbContentActivity extends Activity {
                     vPayDateWeekDay.setTextColor(vPayDate.getCurrentTextColor());
                 }
 
-
                 TextView vDescription = (TextView) view.findViewById(R.id.tvDescription);
-                vDescription.setText(cursor.getString(idxDescription));
+                vDescription.setText(cursor.getString(idxDescription)+" " + cursor.getInt(idxExpImp));
             }
         };
         lvData = (ListView) findViewById(R.id.lvData);

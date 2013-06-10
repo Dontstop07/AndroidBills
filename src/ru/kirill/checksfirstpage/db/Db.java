@@ -1,6 +1,7 @@
 
 package ru.kirill.checksfirstpage.db;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,7 +29,8 @@ public class Db {
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_DESCRIPTION = "description";
 	public static final String COLUMN_KIND = "kind";
-	private final Context ctx;
+    public static final String COLUMN_EXP_IMP = "exp_imp";
+    private final Context ctx;
 	private DBHelper dbHelper;
 	private final int DB_VERSION = 4;
 	private final String DB_NAME = "myDb";
@@ -54,12 +56,32 @@ public class Db {
 		mDb.delete("bills", COLUMN_ID + " = " + id, null);
 	}
 
-	public void edit(BillDto billDto) {
-		// TODO Auto-generated method stub
+    public void edit(BillDto billDto) {
+        edit(billDto, false);
+    }
+
+    public void edit(BillDto billDto, boolean isImported) {
         ContentValues cv = getFilledContentValues(billDto);
-        cv.put("exp_imp", "0"); // - чек может быть выгружен на почту
+        if( ! isImported ) {
+            // Не импортирован - значит введён вручную на этом телефоне
+            cv.put("exp_imp", "0"); // - чек может быть выгружен на почту
+        }
         mDb.update("bills", cv, "_id=?", new String[] {billDto.id});
 	}
+
+    public BillDto getBillDtoByUuid(String uuid) {
+        String[] whereParamaters = new String[] {uuid};
+        String where = "uuid = ?"; // при выборе записей из таблицы bills
+        // вместо "вопросика" будет использовано
+        // значение находящееся в массиве whereParamaters
+        Cursor cursor = mDb.query("bills", null, where, whereParamaters, null, null, null);
+        if(cursor.moveToNext() ) {
+            BillDto result = new BillDto();
+            fillBillFields(cursor, result);
+            return result;
+        }
+        return null;
+    }
 
     public BillDto get(long id) {
         String[] whereParamaters = new String[] {""+id};
@@ -94,7 +116,10 @@ public class Db {
 		cv.put("cash", dto.cash);
 		cv.put("kind", dto.kind);
 		cv.put("description", dto.description);
-		cv.put("input_date", dateFormat.format(dto.payDate));
+        if( dto.inputDate != null ) {
+            //  Поле заполнено в случае импорта чеков
+            cv.put("input_date", dateFormat.format(dto.inputDate));
+        }
 		calendar.setTime(dto.payDate);
 		cv.put("pay_date_year_month", calendar.get(Calendar.YEAR) * 100 + calendar.get(Calendar.MONTH) + 1);
         if(dto.uuid == null || dto.uuid == null) {
@@ -151,6 +176,13 @@ public class Db {
         result.description = getField(cursor, "description");
         result.uuid = getField(cursor, "uuid");
         result.expImp = getFieldInt(cursor, "exp_imp");
+        String sInputDate = getField(cursor, "input_date");
+
+        try {
+            result.inputDate = dateFormat.parse(sInputDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void transactionSuccessful() {

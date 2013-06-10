@@ -8,6 +8,7 @@ import ru.kirill.checksfirstpage.util.UtilAndroid;
 
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
+import java.util.Locale;
 
 /**
  * Created by oleg on 01.06.13.
@@ -27,22 +28,29 @@ public class MailPartsCreator {
                 .append("statistic::bills.count=")
                 .append(""+ids.length).append("\n");
         int i = 0;
-        SimpleDateFormat dateFmt = new SimpleDateFormat("dd.MM.yyyy");
 
         for(long id: ids) {
             BillDto bill = db.get(id);
-            sb.append("bill.npp=").append(Integer.toString(i)).append("::")
-                    .append("bill.fields=")
-                    .append(dateFmt.format(bill.payDate)).append(";")
-                    .append(bill.cash).append(";")
-                    .append(bill.kind).append(";")
-                    .append(bill.description).append(";")
-                    .append(bill.uuid).append(";")
-                    .append("bill.inputDate").append("\n");
+            sb.append("bill.npp=").append(Integer.toString(i)).append("::");
+            sb.append(serializeBillDto(bill));
+            sb.append("\n");
             i++;
         }
 
         return sb;
+    }
+
+    private static SimpleDateFormat dateFmt = new SimpleDateFormat("dd.MM.yyyy");
+    private static SimpleDateFormat dateTimeFmt = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+
+    public static String serializeBillDto(BillDto bill) {
+        return   "bill.fields="
+                +dateFmt.format(bill.payDate)+";"
+                +bill.cash+";"
+                +bill.kind+";"
+                +bill.description+";"
+                +bill.uuid+";"
+                +dateTimeFmt.format(bill.inputDate);
     }
 
 

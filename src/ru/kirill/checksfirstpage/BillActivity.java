@@ -200,6 +200,8 @@ public class BillActivity extends Activity implements OnClickListener {
             // editMode = 0; //0 - добавление, 1 - редактирование
 	        if (editMode == 0) {
                 // кнопка ОК
+                billDto.inputDate = null;
+                billDto.uuid = null;
 	            db.insert(billDto);
                 tvLastBill.setText("" + billDto.kind + " " + billDto.cash);
                 billDto.cash = "";
@@ -208,11 +210,10 @@ public class BillActivity extends Activity implements OnClickListener {
                 inputDesc.setText(billDto.description);
                 etSum.requestFocus();  // Установим фокус ввода в поле суммы
 	        } else {
+                billDto.inputDate = new Date(); // Изменим дату ввода чека на текущую
 	        	db.edit(billDto);
                 finish(); // закроем текущую activity
 	        }
-
-
 
 			break;
 		}

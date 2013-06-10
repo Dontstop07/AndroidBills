@@ -5,19 +5,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.service.textservice.SpellCheckerService;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import ru.kirill.checksfirstpage.mail.MailPartsCreator;
+import ru.kirill.checksfirstpage.mail.BillsFilter;
+import ru.kirill.checksfirstpage.mail.BillsFilterImpl;
 import ru.kirill.checksfirstpage.mail.receive.MailReceiveProperties;
 import ru.kirill.checksfirstpage.mail.receive.MailReceivePropertiesImpl;
-import ru.kirill.checksfirstpage.mail.send.Mail;
-import ru.kirill.checksfirstpage.mail.send.MailProperties;
-import ru.kirill.checksfirstpage.mail.send.MailSendProperties;
+import ru.kirill.checksfirstpage.mail.receive.MailReceiver;
 
+import javax.activation.DataHandler;
 import javax.mail.*;
+import javax.mail.internet.MimeMultipart;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Enumeration;
 import java.util.Properties;
 
 /**
@@ -71,47 +76,19 @@ public class ReceiveBillsActivity extends Activity implements View.OnClickListen
             }
         };
 
+        final MailReceiver mailReceiver = new MailReceiver(this);
+        mailReceiver.setHandler(h);
+
+
         final Runnable rMailReceiver = new Runnable() {
             @Override
             public void run() {
                 sendStringForLog("Начало приёма чеков.", h);
-                Properties pop3props = new Properties();
-                pop3props.setProperty("mail.pop3.socketFactory.class",
-                                      "javax.net.ssl.SSLSocketFactory");
-                pop3props.setProperty("mail.pop3.socketFactory.fallback", "false");
-                pop3props.setProperty("mail.pop3.port", ""+mailProperties.getPop3Port());
-
-                URLName url = new URLName("pop3", mailProperties.getPop3ServerAddress(),
-                                           mailProperties.getPop3Port(), "",
-                        mailProperties.getPop3LoginName(),
-                        mailProperties.getPop3LoginPassword());
-
-                Session session = Session.getInstance(pop3props, null);
-                Exception ex=null;
                 try {
-                    Store store = session.getStore(url);
-                    store.connect();
-                    Folder folder = store.getFolder(mailProperties.getPop3Folder());
-                    folder.open(Folder.READ_ONLY);
-                    javax.mail.Message[] messages = folder.getMessages();
-                    int i = 1;
-                    for(javax.mail.Message mesage: messages) {
-                        sendStringForLog(""+i + ". " + mesage.getSubject(), h);
-                        i++;
-                    }
-                    sendStringForLog("Чеки приняты успешно.", h);
-                    folder.close(false); // Не удаляем удалённые сообщения
-                    store.close();
-
-                } catch (NoSuchProviderException e) {
-                    ex=e;
-                } catch (MessagingException e) {
-                    ex=e;
-                }
-
-                if(ex != null) {
+                    mailReceiver.receive();
+                } catch (Exception e) {
                     sendStringForLog("Ошибка. Чеки не приняты.", h);
-                    sendStringForLog(ex.toString(), h);
+                    sendStringForLog(e.toString(), h);
                 }
             }
         };
@@ -134,6 +111,6 @@ public class ReceiveBillsActivity extends Activity implements View.OnClickListen
     }
 
     private void addLogText(String s) {
-        tvLogLines.setText(tvLogLines.getText() + "\n" + s);
+        tvLogLines.setText(s + "\n" + tvLogLines.getText() );
     }
 }
