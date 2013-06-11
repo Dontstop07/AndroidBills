@@ -74,12 +74,12 @@ public class BillActivity extends Activity implements OnClickListener {
         kinds = new String[cursor.getCount()];
         cursor.moveToFirst();
 
-        int nameColIndex = cursor.getColumnIndex("name");
-        int index = 0;
-        do {
-            kinds[index] = cursor.getString(nameColIndex);
-            index++;
-        } while (cursor.moveToNext());
+            int nameColIndex = cursor.getColumnIndex("name");
+            int index = 0;
+            do {
+                kinds[index] = cursor.getString(nameColIndex);
+                index++;
+            } while (cursor.moveToNext());
 
         int selection = -1;
 		for (int i = 0; i<kinds.length; i++){
@@ -100,7 +100,7 @@ public class BillActivity extends Activity implements OnClickListener {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, kinds);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        sKind = (Spinner) findViewById(R.id.sExpType);
+		sKind = (Spinner) findViewById(R.id.sExpType);
         sKind.setPrompt("Вид затрат");
         sKind.setAdapter(adapter);
         sKind.setSelection(selection);
