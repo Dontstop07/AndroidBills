@@ -35,6 +35,10 @@ public class DbContentActivity extends Activity {
     private ListView lvData;
     private static final int CM_DELETE_ID = 1;
     private static final int CM_EDIT_ID = 2;
+    public static int selectedYear;
+    public static int selectedMonth;
+    public static String selectedKind;
+    public static boolean useSelected = false;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +48,13 @@ public class DbContentActivity extends Activity {
         db.open();
 
         // получаем курсор
+        if (useSelected) {
+            cursor = db.getFilteredData(selectedYear,selectedMonth,selectedKind);
+            TextView tv = (TextView) findViewById(R.id.tvHeader);
+            tv.setText("—писок чеков. год: " + selectedYear + " мес€ц: " + selectedMonth);
+        } else {
         cursor = db.getAllData();
+        }
         startManagingCursor(cursor);
 
         final int idxCash = cursor.getColumnIndex(Db.COLUMN_CASH);

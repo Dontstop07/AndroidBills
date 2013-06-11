@@ -8,7 +8,6 @@ import ru.kirill.checksfirstpage.util.UtilAndroid;
 
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
-import java.util.Locale;
 
 /**
  * Created by oleg on 01.06.13.
@@ -41,7 +40,6 @@ public class MailPartsCreator {
     }
 
     private static SimpleDateFormat dateFmt = new SimpleDateFormat("dd.MM.yyyy");
-    private static SimpleDateFormat dateTimeFmt = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
 
     public static String serializeBillDto(BillDto bill) {
         return   "bill.fields="
@@ -50,7 +48,7 @@ public class MailPartsCreator {
                 +bill.kind+";"
                 +bill.description+";"
                 +bill.uuid+";"
-                +dateTimeFmt.format(bill.inputDate);
+                +bill.inputDate;
     }
 
 

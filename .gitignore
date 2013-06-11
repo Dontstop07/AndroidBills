@@ -1,10 +1,4 @@
 bin
-
+gen
+.settings
 out
-.idea
-
-/out/production/ChecksMainPage
-.idea
-
-out
-/.idea

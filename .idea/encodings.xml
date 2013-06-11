@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="windows-1251">
+    <file url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivity.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/KindsListActivityDb.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/SendBillsActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/receive/MailReceiver.java" charset="windows-1251" />
+    <file url="PROJECT" charset="windows-1251" />
+  </component>
+</project>
+
