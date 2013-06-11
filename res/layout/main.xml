@@ -31,7 +31,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dip"
-            android:text="Выгрузить чеки на почту"/>
+            android:text="Выгрузить чеки на почту" />
 
         <Button
             android:id="@+id/btnReceive"
@@ -46,6 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dip"
             android:text="Список видов затрат" />
+
+        <Button
+                android:id="@+id/btnBillsByYear"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dip"
+                android:text="Затраты по годам" />
 
     </LinearLayout>
 

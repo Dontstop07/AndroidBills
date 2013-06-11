@@ -1,5 +1,8 @@
+
+
 package ru.kirill.checksfirstpage.db;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,49 +25,71 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by oleg on 25.05.13.
  */
 public class Db {
-	public static final String COLUMN_PAY_DATE = "pay_date";
-	public static final String COLUMN_CASH = "cash";
-	public static final String COLUMN_ID = "_id";
-	public static final String COLUMN_DESCRIPTION = "description";
-	public static final String COLUMN_KIND = "kind";
-	private final Context ctx;
-	private DBHelper dbHelper;
-	private final int DB_VERSION = 4;
-	private final String DB_NAME = "myDb";
-	private SQLiteDatabase mDb;
+    public static final String COLUMN_PAY_DATE = "pay_date";
+    public static final String COLUMN_CASH = "cash";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_CAPTION = "caption";
+    public static final String COLUMN_KIND = "kind";
+    public static final String COLUMN_EXP_IMP = "exp_imp";
+    private final Context ctx;
+    private DBHelper dbHelper;
+    private final int DB_VERSION = 4;
+    private final String DB_NAME = "myDb";
+    private SQLiteDatabase mDb;
 
-	public Db(Context ctx) {
-		this.ctx = ctx;
-	}
+    public Db(Context ctx) {
+        this.ctx = ctx;
+    }
 
-	public void open() {
-		dbHelper = new DBHelper(ctx, DB_NAME, null, DB_VERSION);
-		mDb = dbHelper.getWritableDatabase();
-	}
+    public void open() {
+        dbHelper = new DBHelper(ctx, DB_NAME, null, DB_VERSION);
+        mDb = dbHelper.getWritableDatabase();
+    }
 
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	Calendar calendar = new GregorianCalendar();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Calendar calendar = new GregorianCalendar();
 
-	public void insert(BillDto billDto) {
-		mDb.insert("bills", null, getFilledContentValues(billDto));
-	}
+    public void insert(BillDto billDto) {
+        mDb.insert("bills", null, getFilledContentValues(billDto));
+    }
 
-	public void delRec(long id) {
-		mDb.delete("bills", COLUMN_ID + " = " + id, null);
-	}
+    public void delRec(long id) {
+        mDb.delete("bills", COLUMN_ID + " = " + id, null);
+    }
 
-	public void edit(BillDto billDto) {
-		// TODO Auto-generated method stub
+    public void edit(BillDto billDto) {
+        edit(billDto, false);
+    }
+
+    public void edit(BillDto billDto, boolean isImported) {
         ContentValues cv = getFilledContentValues(billDto);
-        cv.put("exp_imp", "0"); // - чек может быть выгружен на почту
+        if( ! isImported ) {
+            // Не импортирован - значит введён вручную на этом телефоне
+            cv.put("exp_imp", "0"); // - чек может быть выгружен на почту
+        }
         mDb.update("bills", cv, "_id=?", new String[] {billDto.id});
-	}
+    }
+
+    public BillDto getBillDtoByUuid(String uuid) {
+        String[] whereParamaters = new String[] {uuid};
+        String where = "uuid = ?"; // при выборе записей из таблицы bills
+        // вместо "вопросика" будет использовано
+        // значение находящееся в массиве whereParamaters
+        Cursor cursor = mDb.query("bills", null, where, whereParamaters, null, null, null);
+        if(cursor.moveToNext() ) {
+            BillDto result = new BillDto();
+            fillBillFields(cursor, result);
+            return result;
+        }
+        return null;
+    }
 
     public BillDto get(long id) {
         String[] whereParamaters = new String[] {""+id};
         String where = "_id = ?"; // при выборе записей из таблицы bills
-                                  // вместо "вопросика" будет использовано
-                                  // значение находящееся в массиве whereParamaters
+        // вместо "вопросика" будет использовано
+        // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("bills", null, where, whereParamaters, null, null, "pay_date, cash");
         if(cursor.moveToNext() ) {
             BillDto result = new BillDto();
@@ -88,32 +113,35 @@ public class Db {
     }
 
     private ContentValues getFilledContentValues(BillDto dto) {
-		ContentValues cv = new ContentValues();
-		cv.put("pay_date", dateFormat.format(dto.payDate));
-		cv.put("cash", dto.cash);
-		cv.put("kind", dto.kind);
-		cv.put("description", dto.description);
-		cv.put("input_date", dateFormat.format(dto.payDate));
-		calendar.setTime(dto.payDate);
-		cv.put("pay_date_year_month", calendar.get(Calendar.YEAR) * 100 + calendar.get(Calendar.MONTH) + 1);
+        ContentValues cv = new ContentValues();
+        cv.put("pay_date", dateFormat.format(dto.payDate));
+        cv.put("cash", dto.cash);
+        cv.put("kind", dto.kind);
+        cv.put("description", dto.description);
+        if( dto.inputDate != null ) {
+            //  Поле заполнено в случае импорта чеков
+            cv.put("input_date", dateFormat.format(dto.inputDate));
+        }
+        calendar.setTime(dto.payDate);
+        cv.put("pay_date_year_month", calendar.get(Calendar.YEAR) * 100 + calendar.get(Calendar.MONTH) + 1);
         if(dto.uuid == null || dto.uuid == null) {
             dto.uuid = UUID.randomUUID().toString();
         }
         cv.put("uuid", dto.uuid);
         cv.put("exp_imp", dto.expImp);
-		return cv;
-	}
+        return cv;
+    }
 
-	public void clear() {
-		mDb.execSQL("delete from bills");
-	}
+    public void clear() {
+        mDb.execSQL("delete from bills");
+    }
 
-	public void close() {
-		if (dbHelper!=null) {
-			mDb.close();
-			dbHelper.close();
-		}
-	}
+    public void close() {
+        if (dbHelper!=null) {
+            mDb.close();
+            dbHelper.close();
+        }
+    }
 
     // получить данные из таблицы DB_TABLE
     public Cursor getData(int expImp) {
@@ -128,7 +156,7 @@ public class Db {
         return mDb.query("bills", null, where, null, null, null, "pay_date, cash");
     }
 
-	// получить все данные из таблицы DB_TABLE
+    // получить все данные из таблицы DB_TABLE
     public Cursor getAllData() {
         return mDb.query("bills", null, null, null, null, null, "pay_date, cash");
     }
@@ -150,6 +178,13 @@ public class Db {
         result.description = getField(cursor, "description");
         result.uuid = getField(cursor, "uuid");
         result.expImp = getFieldInt(cursor, "exp_imp");
+        String sInputDate = getField(cursor, "input_date");
+
+        try {
+            result.inputDate = dateFormat.parse(sInputDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void transactionSuccessful() {
@@ -171,7 +206,13 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("kinds", null, where, whereParamaters, null, null, "name");
-        return extractKindDto(cursor);
+        if(cursor.moveToNext() ) {
+            KindDto result = new KindDto();
+            result.id = getField(cursor, "_id");
+            result.name = getField(cursor, "name");
+            return result;
+        }
+        return null;
     }
 
     //сохранить запись
@@ -239,34 +280,70 @@ public class Db {
         }
     }
 
-    private class DBHelper extends SQLiteOpenHelper {
-		public DBHelper(Context ctx, String dbName, SQLiteDatabase.CursorFactory cursorFactory, int dbVersion)  {
-			super(ctx, dbName, cursorFactory, dbVersion);
-		}
+    public Cursor getDataByYears() {
+        return mDb.rawQuery("SELECT sum(cash) as cash, strftime('%Y', pay_date) as _id \n" +
+                "FROM bills \n" +
+                "group by strftime('%Y', pay_date)\n" +
+                "order by 2 desc\n", null);
+    }
 
-		@Override
-		public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    public Cursor getDataByYearMonths(int year) {
+        String[] params = {
+                ""+year+"00", ""+year+"12"
+        };
+        return mDb.rawQuery("SELECT sum(cash) as cash, strftime('%m', pay_date) as _id \n" +
+                "FROM bills where pay_date_year_month between ? and ? \n" +
+                "group by strftime('%m', pay_date)\n", params);
+    }
+
+    public Cursor getDataByYearMonthKinds(int year, int month) {
+        String[] params = {
+                ""+(year*100+month)
+        };
+        return mDb.rawQuery("SELECT sum(cash) as cash, kind as _id \n" +
+                "FROM bills where pay_date_year_month = ? \n" +
+                "group by kind \n" +
+                "order by 1 desc", params);
+    }
+
+    public Cursor getFilteredData(int selectedYear, int selectedMonth, String selectedKind) {
+        String[] params = {
+                ""+(selectedYear*100+selectedMonth),
+                selectedKind
+        };
+        return mDb.rawQuery("SELECT * \n" +
+                "FROM bills where pay_date_year_month = ? and kind = ?\n" +
+                "order by pay_date, cash", params);
+    }
+
+    private class DBHelper extends SQLiteOpenHelper {
+        public DBHelper(Context ctx, String dbName, SQLiteDatabase.CursorFactory cursorFactory, int dbVersion)  {
+            super(ctx, dbName, cursorFactory, dbVersion);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase sqLiteDatabase) {
             createBills(sqLiteDatabase);
             createKinds(sqLiteDatabase);
-		}
+        }
 
         private void createBills(SQLiteDatabase sqLiteDatabase) {
-			String DB_DDL =
-					" CREATE TABLE bills ( "
-							+ " _id INTEGER PRIMARY KEY AUTOINCREMENT, "
-							+ " pay_date DATE NOT NULL, "
-							+ " cash DECIMAL(15,2) NOT NULL DEFAULT 0, "
-							+ " kind VARCHAR(250) NOT NULL DEFAULT '', "
-							+ " description VARCHAR(250) DEFAULT '', "
-							+ " uuid VARCHAR(50), "
-							+ " input_date DATETIME default current_timestamp, "
-							+ " pay_date_year_month decimal(6), "
-							+ " exp_imp decimal(1) default 0"
-							+ "); ";
-			sqLiteDatabase.execSQL(DB_DDL);
-		}
+            String DB_DDL =
+                    " CREATE TABLE bills ( "
+                            + " _id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                            + " pay_date DATE NOT NULL, "
+                            + " cash DECIMAL(15,2) NOT NULL DEFAULT 0, "
+                            + " kind VARCHAR(250) NOT NULL DEFAULT '', "
+                            + " description VARCHAR(250) DEFAULT '', "
+                            + " uuid VARCHAR(50), "
+                            + " input_date DATETIME default current_timestamp, "
+                            + " pay_date_year_month decimal(6), "
+                            + " exp_imp decimal(1) default 0"
+                            + "); ";
+            sqLiteDatabase.execSQL(DB_DDL);
+        }
 
-		@Override
+        @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
             if (oldVersion == 1 && newVersion == 2) {
                 createKinds(sqLiteDatabase);

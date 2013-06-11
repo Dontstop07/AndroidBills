@@ -20,38 +20,44 @@ public class MailPartsCreator {
     public static StringBuilder getMessageBody(Context ctx, Db db, long[] ids) {
         StringBuilder sb = new StringBuilder();
 
-        // РїРѕР»СѓС‡Р°РµРј РєСѓСЂСЃРѕСЂ
+        // получаем курсор
 
         sb.append("phone.IMEI=").append(UtilAndroid.getIMEI(ctx)).append("\n")
                 .append("fields=date;cash;kind;description;uuid;inputdate\n")
                 .append("statistic::bills.count=")
                 .append(""+ids.length).append("\n");
         int i = 0;
-        SimpleDateFormat dateFmt = new SimpleDateFormat("dd.MM.yyyy");
 
         for(long id: ids) {
             BillDto bill = db.get(id);
-            sb.append("bill.npp=").append(Integer.toString(i)).append("::")
-                    .append("bill.fields=")
-                    .append(dateFmt.format(bill.payDate)).append(";")
-                    .append(bill.cash).append(";")
-                    .append(bill.kind).append(";")
-                    .append(bill.description).append(";")
-                    .append(bill.uuid).append(";")
-                    .append("bill.inputDate").append("\n");
+            sb.append("bill.npp=").append(Integer.toString(i)).append("::");
+            sb.append(serializeBillDto(bill));
+            sb.append("\n");
             i++;
         }
 
         return sb;
     }
 
+    private static SimpleDateFormat dateFmt = new SimpleDateFormat("dd.MM.yyyy");
+
+    public static String serializeBillDto(BillDto bill) {
+        return   "bill.fields="
+                +dateFmt.format(bill.payDate)+";"
+                +bill.cash+";"
+                +bill.kind+";"
+                +bill.description+";"
+                +bill.uuid+";"
+                +bill.inputDate;
+    }
+
 
     public static long[] getNewBillsIds(Context ctx) {
-        return getBillsIds(ctx, 0); // РЅРѕРІС‹Рµ С‡РµРєРё
+        return getBillsIds(ctx, 0); // новые чеки
     }
 
     public static long[] getNotImportedAndEditedBillsIds(Context ctx) {
-        return getBillsIds(ctx, 1); // Р§РµРєРё РІРІРµРґС‘РЅРЅС‹Рµ РЅР° СЌС‚РѕРј СѓСЃС‚СЂРѕР№СЃС‚РІРµ
+        return getBillsIds(ctx, 1); // Чеки введённые на этом устройстве
     }
 
     public static long[] getBillsIds(Context ctx, int impExp) {

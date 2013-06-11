@@ -52,6 +52,13 @@
 
         <activity android:name=".ReceiveBillsActivity"></activity>
 
+        <activity android:name=".BillsByYearActivity"></activity>
+
+        <activity android:name=".BillsByYearMonthsActivity"></activity>
+
+        <activity android:name=".BillsByYearMonthKindsActivity"></activity>
+
+
     </application>
 
 </manifest>

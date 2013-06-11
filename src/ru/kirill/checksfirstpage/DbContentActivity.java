@@ -35,6 +35,10 @@ public class DbContentActivity extends Activity {
     private ListView lvData;
     private static final int CM_DELETE_ID = 1;
     private static final int CM_EDIT_ID = 2;
+    public static int selectedYear;
+    public static int selectedMonth;
+    public static String selectedKind;
+    public static boolean useSelected = false;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,15 +47,27 @@ public class DbContentActivity extends Activity {
         db = new Db(this);
         db.open();
 
-        // РїРѕР»СѓС‡Р°РµРј РєСѓСЂСЃРѕСЂ
+        // получаем курсор
+        if (useSelected) {
+            cursor = db.getFilteredData(selectedYear,selectedMonth,selectedKind);
+            TextView tv = (TextView) findViewById(R.id.tvHeader);
+            tv.setText("Список чеков. год: " + selectedYear + " месяц: " + selectedMonth);
+        } else {
         cursor = db.getAllData();
+        }
         startManagingCursor(cursor);
 
-        // С„РѕСЂРјРёСЂСѓРµРј СЃС‚РѕР»Р±С†С‹ СЃРѕРїРѕСЃС‚Р°РІР»РµРЅРёСЏ
+        final int idxCash = cursor.getColumnIndex(Db.COLUMN_CASH);
+        final int idxKind = cursor.getColumnIndex(Db.COLUMN_KIND);
+        final int idxPayDate = cursor.getColumnIndex(Db.COLUMN_PAY_DATE);
+        final int idxDescription = cursor.getColumnIndex(Db.COLUMN_DESCRIPTION);
+        final int idxExpImp = cursor.getColumnIndex(Db.COLUMN_EXP_IMP);
+
+        // формируем столбцы сопоставления
         //        String[] from = new String[]{Db.COLUMN_ID, Db.COLUMN_CASH, Db.COLUMN_PAY_DATE, Db.COLUMN_KIND, Db.COLUMN_DESCRIPTION};
         //        int[] to = new int[]{R.id.tvId, R.id.tvCash, R.id.tvPayDate, R.id.tvKind, R.id.tvDescription};
 
-        // СЃРѕР·РґР°Р°РµРј Р°РґР°РїС‚РµСЂ Рё РЅР°СЃС‚СЂР°РёРІР°РµРј СЃРїРёСЃРѕРє
+        // создааем адаптер и настраиваем список
         lvData = (ListView) findViewById(R.id.lvData);
 //      scAdapter = new SimpleCursorAdapter(this, R.layout.act_cash_list_item, cursor, from, to);
 
@@ -88,10 +104,6 @@ public class DbContentActivity extends Activity {
 
             @Override
             public void bindView(View view, Context context, Cursor cursor) {
-                int idxCash = cursor.getColumnIndex(Db.COLUMN_CASH);
-                int idxKind = cursor.getColumnIndex(Db.COLUMN_KIND);
-                int idxPayDate = cursor.getColumnIndex(Db.COLUMN_PAY_DATE);
-                int idxDescription = cursor.getColumnIndex(Db.COLUMN_DESCRIPTION);
 
                 TextView vCash = (TextView) view.findViewById(R.id.tvCash);
                 vCash.setText(df.format(cursor.getFloat(idxCash)));
@@ -128,17 +140,16 @@ public class DbContentActivity extends Activity {
                 TextView vPayDateWeekDay = (TextView) view.findViewById(R.id.tvPayDateWeekDay);
                 vPayDateWeekDay.setText(sWeekDay);
 
-                boolean vSb = calendar.get(Calendar.DAY_OF_WEEK) == 7; // РЎСѓР±Р±РѕС‚Р°
-                boolean vVs = calendar.get(Calendar.DAY_OF_WEEK) == 1; // Р’РѕСЃРєСЂРµСЃРµРЅРёРµ
+                boolean vSb = calendar.get(Calendar.DAY_OF_WEEK) == 7; // Суббота
+                boolean vVs = calendar.get(Calendar.DAY_OF_WEEK) == 1; // Воскресение
                 if(vSb || vVs) {
                     vPayDateWeekDay.setTextColor(weekEndColor);
                 } else {
                     vPayDateWeekDay.setTextColor(vPayDate.getCurrentTextColor());
                 }
 
-
                 TextView vDescription = (TextView) view.findViewById(R.id.tvDescription);
-                vDescription.setText(cursor.getString(idxDescription));
+                vDescription.setText(cursor.getString(idxDescription)+" " + cursor.getInt(idxExpImp));
             }
         };
         lvData = (ListView) findViewById(R.id.lvData);
@@ -154,15 +165,15 @@ public class DbContentActivity extends Activity {
 
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getItemId() == CM_DELETE_ID) {
-            // РїРѕР»СѓС‡Р°РµРј РёР· РїСѓРЅРєС‚Р° РєРѕРЅС‚РµРєСЃС‚РЅРѕРіРѕ РјРµРЅСЋ РґР°РЅРЅС‹Рµ РїРѕ РїСѓРЅРєС‚Сѓ СЃРїРёСЃРєР°
+            // получаем из пункта контекстного меню данные по пункту списка
             AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
-            // РёР·РІР»РµРєР°РµРј id Р·Р°РїРёСЃРё Рё СѓРґР°Р»СЏРµРј СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ Р·Р°РїРёСЃСЊ РІ Р‘Р”
+            // извлекаем id записи и удаляем соответствующую запись в БД
             db.delRec(acmi.id);
-            // РѕР±РЅРѕРІР»СЏРµРј РєСѓСЂСЃРѕСЂ
+            // обновляем курсор
             cursor.requery();
             return true;
         } else if (item.getItemId() == CM_EDIT_ID) {
-            // РїРѕР»СѓС‡Р°РµРј РёР· РїСѓРЅРєС‚Р° РєРѕРЅС‚РµРєСЃС‚РЅРѕРіРѕ РјРµРЅСЋ РґР°РЅРЅС‹Рµ РїРѕ РїСѓРЅРєС‚Сѓ СЃРїРёСЃРєР°
+            // получаем из пункта контекстного меню данные по пункту списка
             AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item.getMenuInfo();
             long id = acmi.id;
             BillDto billDto = db.get(id);
@@ -170,12 +181,12 @@ public class DbContentActivity extends Activity {
             BillActivity.editMode = 1;
             Intent intent = new Intent(this, BillActivity.class);
             startActivity(intent);
-            // РёР·РІР»РµРєР°РµРј id Р·Р°РїРёСЃРё Рё СѓРґР°Р»СЏРµРј СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ Р·Р°РїРёСЃСЊ РІ Р‘Р”
-            Toast.makeText(this, "СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ", Toast.LENGTH_SHORT).show();
+            // извлекаем id записи и удаляем соответствующую запись в БД
+            Toast.makeText(this, "редактирование", Toast.LENGTH_SHORT).show();
 
-            // РѕР±РЅРѕРІР»СЏРµРј РєСѓСЂСЃРѕСЂ
-            // РІРµСЂРѕСЏС‚РЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ РєСѓСЂСЃРѕСЂР° РЅСѓР¶РЅРѕ РїРѕРјРµСЃС‚РёС‚СЊ РІ РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕР±С‹С‚РёСЏ РєРѕС‚РѕСЂРѕРµ РїСЂРѕРёСЃС…РѕРґРёС‚
-            // РєРѕРіРґР° С‚РµРєСѓС‰РµРµ Р°РєС‚РёРІРёС‚Рё СЃС‚Р°РЅРµС‚ РѕРїСЏС‚СЊ СЃС‚Р°РЅРµС‚ Р°РєС‚РёРІРЅС‹Рј
+            // обновляем курсор
+            // вероятно обновление курсора нужно поместить в обработчик события которое происходит
+            // когда текущее активити станет опять станет активным
             cursor.requery();
             return true;
         }

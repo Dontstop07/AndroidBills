@@ -17,6 +17,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	Button btnBill;
 	Button btnBillsList;
 	Button btnKindsList;
+    Button btnBillsByYear;
 
 	private static final String TAG = "myLogs";
     private Button btnSend;
@@ -32,6 +33,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		btnBill = (Button) findViewById(R.id.btnBill);
 		btnBillsList = (Button) findViewById(R.id.btnBillsList);
 		btnKindsList = (Button) findViewById(R.id.btnKindsList);
+        btnBillsByYear = (Button) findViewById(R.id.btnBillsByYear);
 
         btnSend = (Button) findViewById(R.id.btnSend);
         btnReceive = (Button) findViewById(R.id.btnReceive);
@@ -43,7 +45,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		btnKindsList.setOnClickListener(this);
         btnSend.setOnClickListener(this);
         btnReceive.setOnClickListener(this);
-	}
+        btnBillsByYear.setOnClickListener(this);
+    }
 
 	@Override
     public void onClick(View v) {
@@ -64,6 +67,7 @@ public class MainActivity extends Activity implements OnClickListener {
             case R.id.btnBillsList: {
                 // кнопка Список чеков
                 Intent intent = new Intent(this, DbContentActivity.class);
+                DbContentActivity.useSelected = false;
                 startActivity(intent);
                 break; }
             case R.id.btnKindsList: {
@@ -81,6 +85,12 @@ public class MainActivity extends Activity implements OnClickListener {
             case R.id.btnReceive: {
                 // кнопка Получить чеки
                 Intent intent = new Intent(this, ReceiveBillsActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.btnBillsByYear: {
+                // кнопка Получить чеки
+                Intent intent = new Intent(this,BillsByYearActivity.class);
                 startActivity(intent);
                 break;
             }
