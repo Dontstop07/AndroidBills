@@ -1,6 +1,7 @@
 package ru.kirill.checksfirstpage;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -79,7 +80,22 @@ public class BillActivity extends Activity implements OnClickListener {
                 kinds[index] = cursor.getString(nameColIndex);
                 index++;
             } while (cursor.moveToNext());
-        billDto.kind = "1";
+
+        int selection = -1;
+		for (int i = 0; i<kinds.length; i++){
+			String s = kinds[i];
+			if (billDto.kind.equals(s)) {
+                selection = i;
+				break;
+			}
+		}
+
+        if(selection == -1 && billDto.kind != null && ! billDto.kind.trim().equals("")) {
+            String[] expandedKinds = Arrays.copyOf(kinds, kinds.length+1, String[].class);
+            expandedKinds[expandedKinds.length-1] = billDto.kind;
+            selection = expandedKinds.length-1;
+            kinds = expandedKinds;
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, kinds);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -87,13 +103,7 @@ public class BillActivity extends Activity implements OnClickListener {
 		sKind = (Spinner) findViewById(R.id.sExpType);
         sKind.setPrompt("Вид затрат");
         sKind.setAdapter(adapter);
-		for (int i = 0; i<kinds.length; i++){
-			String s = kinds[i];
-			if (billDto.kind.equals(s)) {
-				sKind.setSelection(i);
-				break;
-			}
-		}
+        sKind.setSelection(selection);
 
 		inputDesc = (EditText) findViewById(R.id.inputDesc);
 		inputDesc.setText(billDto.description);		
