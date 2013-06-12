@@ -8,11 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -47,6 +43,14 @@ public class BillsByYearMonthsActivity extends Activity {
         final int idxCash = cursor.getColumnIndex(Db.COLUMN_CASH);
         final int idxCaption = 1; //cursor.getColumnIndex(Db.COLUMN_CAPTION);
 
+        cursor.moveToFirst();
+        float tmpMaxSum = 0;
+        do {
+            tmpMaxSum = Math.max(tmpMaxSum, cursor.getFloat(idxCash));
+        } while (cursor.moveToNext());
+
+        final float maxSum = tmpMaxSum;
+
         // формируем столбцы сопоставления
         //        String[] from = new String[]{Db.COLUMN_ID, Db.COLUMN_CASH, Db.COLUMN_PAY_DATE, Db.COLUMN_KIND, Db.COLUMN_DESCRIPTION};
         //        int[] to = new int[]{R.id.tvId, R.id.tvCash, R.id.tvPayDate, R.id.tvKind, R.id.tvDescription};
@@ -55,7 +59,7 @@ public class BillsByYearMonthsActivity extends Activity {
         lvData = (ListView) findViewById(R.id.lvData);
 //      scAdapter = new SimpleCursorAdapter(this, R.layout.act_cash_list_item, cursor, from, to);
 
-        scAdapter = new SimpleCursorAdapter(this, R.layout.bills_by_year_item, cursor, new String[0], new int[0]) {
+        scAdapter = new SimpleCursorAdapter(this, R.layout.bills_by_kind_item, cursor, new String[0], new int[0]) {
             DecimalFormat df = new DecimalFormat("#.00");
             {
                 //                df.setMaximumFractionDigits(2);
@@ -64,7 +68,7 @@ public class BillsByYearMonthsActivity extends Activity {
             @Override
             public View newView(Context context, Cursor cursor, ViewGroup parent) {
                 final LayoutInflater inflater = LayoutInflater.from(context);
-                View v = inflater.inflate(R.layout.bills_by_year_item, parent, false);
+                View v = inflater.inflate(R.layout.bills_by_kind_item, parent, false);
                 return v;
                 //                return super.newView(context, cursor, parent);
             }
@@ -81,6 +85,9 @@ public class BillsByYearMonthsActivity extends Activity {
                 TextView vKind = (TextView) view.findViewById(R.id.tvItemCaption);
                 vKind.setText(cursor.getString(idxCaption));
 
+                ProgressBar pBar = (ProgressBar) view.findViewById(R.id.progressBar);
+                pBar.setMax((int) maxSum);
+                pBar.setProgress((int) cursor.getFloat(idxCash));
             }
         };
         lvData = (ListView) findViewById(R.id.lvData);
@@ -92,7 +99,7 @@ public class BillsByYearMonthsActivity extends Activity {
                 Toast.makeText(BillsByYearMonthsActivity.this, ""+id, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(BillsByYearMonthsActivity.this, BillsByYearMonthKindsActivity.class);
                 BillsByYearMonthKindsActivity.year = year;
-                BillsByYearMonthKindsActivity.month = (int) id;
+                BillsByYearMonthKindsActivity.month = (int) cursor.getInt(idxCaption);
                 startActivity(intent);
 
             }

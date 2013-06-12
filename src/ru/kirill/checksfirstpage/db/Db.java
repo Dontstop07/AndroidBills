@@ -291,7 +291,7 @@ public class Db {
         String[] params = {
                 ""+year+"00", ""+year+"12"
         };
-        return mDb.rawQuery("SELECT sum(cash) as cash, strftime('%m', pay_date) as _id \n" +
+        return mDb.rawQuery("SELECT sum(cash) as cash, cast(strftime('%m', pay_date) as number) as _id \n" +
                 "FROM bills where pay_date_year_month between ? and ? \n" +
                 "group by strftime('%m', pay_date)\n", params);
     }

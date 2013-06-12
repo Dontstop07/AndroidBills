@@ -149,7 +149,8 @@ public class DbContentActivity extends Activity {
                 }
 
                 TextView vDescription = (TextView) view.findViewById(R.id.tvDescription);
-                vDescription.setText(cursor.getString(idxDescription)+" " + cursor.getInt(idxExpImp));
+                vDescription.setText(cursor.getString(idxDescription)//+" " + cursor.getInt(idxExpImp)
+                );
             }
         };
         lvData = (ListView) findViewById(R.id.lvData);
