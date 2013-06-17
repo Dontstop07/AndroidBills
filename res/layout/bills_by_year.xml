@@ -5,18 +5,31 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-            android:id="@+id/tvHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="top|center_horizontal"
-            android:text="Список чеков по годам"
-            android:textAppearance="@style/AppTheme"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:typeface="sans" />
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/tvHeader"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center|top"
+                android:text="Список чеков по годам"
+                android:textAppearance="@style/AppTheme"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                android:layout_weight="10"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/btnFilter"
+                android:layout_weight="1"/>
+    </LinearLayout>
 
     <ListView
             android:id="@+id/lvData"

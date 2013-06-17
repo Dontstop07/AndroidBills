@@ -37,6 +37,7 @@ public class Db {
     private final int DB_VERSION = 4;
     private final String DB_NAME = "myDb";
     private SQLiteDatabase mDb;
+    public static String[] selectedKinds;
 
     public Db(Context ctx) {
         this.ctx = ctx;
@@ -283,6 +284,8 @@ public class Db {
     public Cursor getDataByYears() {
         return mDb.rawQuery("SELECT sum(cash) as cash, strftime('%Y', pay_date) as _id \n" +
                 "FROM bills \n" +
+//              "where kind in ('ggg', 'hhh')" +
+                getSelectedKinds("where") +
                 "group by strftime('%Y', pay_date)\n" +
                 "order by 2 desc\n", null);
     }
@@ -291,9 +294,25 @@ public class Db {
         String[] params = {
                 ""+year+"00", ""+year+"12"
         };
-        return mDb.rawQuery("SELECT sum(cash) as cash, strftime('%m', pay_date) as _id \n" +
+        return mDb.rawQuery("SELECT sum(cash) as cash, cast(strftime('%m', pay_date) as number) as _id \n" +
                 "FROM bills where pay_date_year_month between ? and ? \n" +
+                getSelectedKinds("and") +
                 "group by strftime('%m', pay_date)\n", params);
+    }
+
+    private String getSelectedKinds(String prefix) {
+        String sKinds = "";
+        if (selectedKinds != null && selectedKinds.length > 0) {
+            sKinds = "";
+            for (String kind : selectedKinds) {
+                if (sKinds.length() > 0) {
+                    sKinds = sKinds + ", ";
+                }
+                sKinds = sKinds + "'" + kind + "'";
+            }
+            sKinds = " " + prefix + " kind in (" + sKinds + ") ";
+        }
+        return sKinds;
     }
 
     public Cursor getDataByYearMonthKinds(int year, int month) {
@@ -302,6 +321,7 @@ public class Db {
         };
         return mDb.rawQuery("SELECT sum(cash) as cash, kind as _id \n" +
                 "FROM bills where pay_date_year_month = ? \n" +
+                getSelectedKinds("and") +
                 "group by kind \n" +
                 "order by 1 desc", params);
     }
@@ -314,6 +334,19 @@ public class Db {
         return mDb.rawQuery("SELECT * \n" +
                 "FROM bills where pay_date_year_month = ? and kind = ?\n" +
                 "order by pay_date, cash", params);
+    }
+
+    public Cursor getKindsFromBills(int year) {
+        if (year == -1) {
+            return mDb.rawQuery("Select distinct kind from bills", null);
+        } else {
+            String[] params = {
+                    ""+year+"00", ""+year+"12"
+            };
+
+            return mDb.rawQuery("Select distinct kind from bills \n" +
+                    "where pay_date_year_month between ? and ?", params);
+        }
     }
 
     private class DBHelper extends SQLiteOpenHelper {
