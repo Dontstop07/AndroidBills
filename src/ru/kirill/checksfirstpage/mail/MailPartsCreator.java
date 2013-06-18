@@ -18,7 +18,21 @@ public class MailPartsCreator {
     {
         return "BillsSystem;version=1.0;check.version=1.2";
     }
+
     public static StringBuilder getMessageBody(Context ctx, Db db, long[] ids) {
+        BillDto billDtos[] = new BillDto[ids.length];
+        int idx = 0;
+        for(long id: ids) {
+            BillDto bill = db.get(id);
+            billDtos[idx] = bill;
+            idx++;
+        }
+
+        return getMessageBody(ctx, billDtos);
+    }
+
+
+    public static StringBuilder getMessageBody(Context ctx, BillDto[] billDtos) {
         StringBuilder sb = new StringBuilder();
 
         // получаем курсор
@@ -26,11 +40,10 @@ public class MailPartsCreator {
         sb.append("phone.IMEI=").append(UtilAndroid.getIMEI(ctx)).append("\n")
                 .append("fields=date;cash;kind;description;uuid;inputdate\n")
                 .append("statistic::bills.count=")
-                .append(""+ids.length).append("\n");
+                .append(""+billDtos.length).append("\n");
         int i = 0;
 
-        for(long id: ids) {
-            BillDto bill = db.get(id);
+        for(BillDto bill: billDtos) {
             sb.append("bill.npp=").append(Integer.toString(i)).append("::");
             sb.append(serializeBillDto(bill));
             sb.append("\n");

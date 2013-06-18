@@ -91,7 +91,12 @@ public class BillActivity extends Activity implements OnClickListener {
 		}
 
         if(selection == -1 && billDto.kind != null && ! billDto.kind.trim().equals("")) {
-            String[] expandedKinds = Arrays.copyOf(kinds, kinds.length+1, String[].class);
+
+            String[] expandedKinds = new String[kinds.length+1];
+            for(int i=0; i < kinds.length; i++) {
+                expandedKinds[i] = kinds[i];
+            }
+
             expandedKinds[expandedKinds.length-1] = billDto.kind;
             selection = expandedKinds.length-1;
             kinds = expandedKinds;
@@ -190,7 +195,7 @@ public class BillActivity extends Activity implements OnClickListener {
 			// Начало проверки
 			float summa=0;
             try {
-                if( ! billDto.cash.isEmpty()) {
+                if( ! billDto.cash.trim().equals("")) {
                     summa = Float.parseFloat(billDto.cash);
                 }
             } catch (NumberFormatException e) {

@@ -63,6 +63,7 @@ public class DbContentActivity extends Activity {
         final int idxDescription = cursor.getColumnIndex(Db.COLUMN_DESCRIPTION);
         final int idxExpImp = cursor.getColumnIndex(Db.COLUMN_EXP_IMP);
 
+
         // формируем столбцы сопоставления
         //        String[] from = new String[]{Db.COLUMN_ID, Db.COLUMN_CASH, Db.COLUMN_PAY_DATE, Db.COLUMN_KIND, Db.COLUMN_DESCRIPTION};
         //        int[] to = new int[]{R.id.tvId, R.id.tvCash, R.id.tvPayDate, R.id.tvKind, R.id.tvDescription};

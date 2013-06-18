@@ -77,12 +77,13 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("bills", null, where, whereParamaters, null, null, null);
+        BillDto result = null;
         if(cursor.moveToNext() ) {
-            BillDto result = new BillDto();
+            result = new BillDto();
             fillBillFields(cursor, result);
-            return result;
         }
-        return null;
+        cursor.close();
+        return result;
     }
 
     public BillDto get(long id) {
@@ -91,13 +92,13 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("bills", null, where, whereParamaters, null, null, "pay_date, cash");
+        BillDto result = null;
         if(cursor.moveToNext() ) {
-            BillDto result = new BillDto();
+            result = new BillDto();
             //result.payDate = cursor.getString(cursor.getColumnIndex("pay_date"));
             fillBillFields(cursor, result);
-            return result;
         }
-        return null;
+        return result;
     }
 
     private String getField(Cursor cursor, String fieldName) {
@@ -206,13 +207,14 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("kinds", null, where, whereParamaters, null, null, "name");
+        KindDto result = null;
         if(cursor.moveToNext() ) {
-            KindDto result = new KindDto();
+            result = new KindDto();
             result.id = getField(cursor, "_id");
             result.name = getField(cursor, "name");
-            return result;
         }
-        return null;
+        cursor.close();
+        return result;
     }
 
     //сохранить запись
@@ -240,15 +242,9 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("kinds", null, where, whereParamaters, null, null, "name");
-        return extractKindDto(cursor);
-       /* Cursor cursor = mDb.query("kinds", null, null, null, null, null, "name");
-        cursor.moveToFirst();
-        do {
-            (cursor.moveToNext() )
-            KindDto result = new KindDto();
-            result.name = getField(cursor, "name");
-        }*/
-
+        KindDto result = extractKindDto(cursor);
+        cursor.close();
+        return result;
     }
 
     private KindDto extractKindDto(Cursor cursor) {

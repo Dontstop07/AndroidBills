@@ -46,13 +46,11 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="fill_horizontal|fill_vertical"
-            android:showDividers="beginning|end"
             android:visibility="visible">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="tvLogLines"
                 android:id="@+id/tvLogLines"
                 android:paddingLeft="16dp"

@@ -132,7 +132,7 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 		    //map.put(ATTRIBUTE_NAME_TEXT, etNewKind.getText());
             String message = null;
             kindDto.name = etNewKind.getText().toString();
-            if( kindDto.name.isEmpty()) {
+            if( kindDto.name.trim().equals("")) {
                 message = "введите название";
             } else {
                 if (editMode == 1) {

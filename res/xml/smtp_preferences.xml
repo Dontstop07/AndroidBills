@@ -19,7 +19,7 @@
         android:title="Пользователь smtp сервера">
         <EditTextPreference
             android:title="login"
-            android:summary="идентификатор пользователя для регистрации на smtp сервере.\n Например: userName@gmail.com"
+            android:summary="иииидентификатор пользователя для регистрации на smtp сервере.\n Например: userName@gmail.com"
             android:key="smtpUser"
             />
         <EditTextPreference
