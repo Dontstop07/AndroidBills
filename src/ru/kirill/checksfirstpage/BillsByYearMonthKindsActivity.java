@@ -18,93 +18,86 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ru.kirill.checksfirstpage.db.Db;
 
 /**
  * Created by K on 11.06.13.
  */
-public class BillsByYearMonthKindsActivity extends Activity {
+public class BillsByYearMonthKindsActivity extends BillsByXActivity {
 
-    private Db db;
-    SimpleCursorAdapter scAdapter;
-    Cursor cursor;
-    private ListView lvData;
     static public int year;
     static public int month;
+    private float mMaxSum;
 
+    @Override
+    protected String getHeaderText() {
+        return "Список видов затрат. год: " + year + " месяц: " + month;
+    }
+
+    @Override
+    protected int getRecordItemLayout() {
+        return R.layout.bills_by_kind_item;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bills_by_year);
-        TextView tv = (TextView) findViewById(R.id.tvHeader);
-        tv.setText("Список видов затрат. год: " + year + " месяц: " + month);
-
-        db = new Db(this);
-        db.open();
-
-        // получаем курсор
-        cursor = db.getDataByYearMonthKinds(year, month);
-        startManagingCursor(cursor);
-
-        final int idxCash = cursor.getColumnIndex(Db.COLUMN_CASH);
-        final int idxCaption = 1; //cursor.getColumnIndex(Db.COLUMN_CAPTION);
+        btnFilter.setText("+");
         cursor.moveToFirst();
-        final float maxSum = cursor.getFloat(idxCash);
+        float tmpMaxSum = 0;
+        do {
+            tmpMaxSum = Math.max(tmpMaxSum, cursor.getFloat(mIdxCash));
+        } while (cursor.moveToNext());
 
-        // формируем столбцы сопоставления
-        //        String[] from = new String[]{Db.COLUMN_ID, Db.COLUMN_CASH, Db.COLUMN_PAY_DATE, Db.COLUMN_KIND, Db.COLUMN_DESCRIPTION};
-        //        int[] to = new int[]{R.id.tvId, R.id.tvCash, R.id.tvPayDate, R.id.tvKind, R.id.tvDescription};
+        mMaxSum = tmpMaxSum;
+    }
 
-        // создааем адаптер и настраиваем список
-        lvData = (ListView) findViewById(R.id.lvData);
-//      scAdapter = new SimpleCursorAdapter(this, R.layout.act_cash_list_item, cursor, from, to);
+    @Override
+    protected Cursor getCursor() {
+        return db.getDataByYearMonthKinds(year, month);
+    }
 
-        scAdapter = new SimpleCursorAdapter(this, R.layout.bills_by_kind_item, cursor, new String[0], new int[0]) {
-            DecimalFormat df = new DecimalFormat("#.00");
-            {
-                //                df.setMaximumFractionDigits(2);
-                //                df.setMinimumFractionDigits(2);
-            }
-            @Override
-            public View newView(Context context, Cursor cursor, ViewGroup parent) {
-                final LayoutInflater inflater = LayoutInflater.from(context);
-                View v = inflater.inflate(R.layout.bills_by_kind_item, parent, false);
-                return v;
-                //                return super.newView(context, cursor, parent);
-            }
+    @Override
+    protected void onBindView(View view, Context context, Cursor cursor) {
+        ProgressBar pBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        pBar.setMax((int) mMaxSum);
+        pBar.setProgress((int) cursor.getFloat(mIdxCash));
+    }
 
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy");
+    @Override
+    protected Intent onDataClick(int id) {
+        Intent intent = new Intent(BillsByYearMonthKindsActivity.this, DbContentActivity.class);
+        DbContentActivity.useSelected = true;
+        DbContentActivity.selectedYear = year;
+        DbContentActivity.selectedMonth = month;
+        DbContentActivity.selectedKind = cursor.getString(mIdxCaption);
+        return intent;
 
+    }
 
-            @Override
-            public void bindView(View view, Context context, Cursor cursor) {
+    @Override
+    protected int getCurrentYear() {
+        return year;
+    }
 
-                TextView vCash = (TextView) view.findViewById(R.id.tvItemSum);
-                vCash.setText(df.format(cursor.getFloat(idxCash)));
-
-                TextView vKind = (TextView) view.findViewById(R.id.tvItemCaption);
-                vKind.setText(cursor.getString(idxCaption));
-
-                ProgressBar pBar = (ProgressBar) view.findViewById(R.id.progressBar);
-                pBar.setMax((int) maxSum);
-                pBar.setProgress((int) cursor.getFloat(idxCash));
-            }
-        };
-        lvData = (ListView) findViewById(R.id.lvData);
-        lvData.setAdapter(scAdapter);
-        //registerForContextMenu(lvData);
-
-        lvData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(BillsByYearMonthKindsActivity.this, ""+id, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(BillsByYearMonthKindsActivity.this, DbContentActivity.class);
-                DbContentActivity.useSelected = true;
-                DbContentActivity.selectedYear = year;
-                DbContentActivity.selectedMonth = month;
-                DbContentActivity.selectedKind = cursor.getString(idxCaption);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnFilter: {
+                btnFilter.setText("...");
+                BillActivity.editMode = 0;
+                Intent intent = new Intent(this, BillActivity.class);
                 startActivity(intent);
-            }
-        });
+                BillActivity.billDto.cash = "";
+                BillActivity.billDto.payDate = new Date();
+                BillActivity.billDto.kind = "";
+                BillActivity.billDto.description = "";
+                startActivity(intent);
+                break; }
+        }
+
     }
 
 }

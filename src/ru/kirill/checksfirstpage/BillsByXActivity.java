@@ -40,7 +40,7 @@ public abstract class BillsByXActivity extends Activity implements View.OnClickL
         tv.setText(getHeaderText());
 
         btnFilter = (Button) findViewById(R.id.btnFilter);
-
+        btnFilter.setText("...");
         btnFilter.setOnClickListener(this);
 
         db = new Db(this);
@@ -97,6 +97,7 @@ public abstract class BillsByXActivity extends Activity implements View.OnClickL
                 Toast.makeText(BillsByXActivity.this, "" + id, Toast.LENGTH_SHORT).show();
                 Intent intent = onDataClick((int) id);
                 startActivity(intent);
+
             }
         });
     }
@@ -119,8 +120,23 @@ public abstract class BillsByXActivity extends Activity implements View.OnClickL
             case R.id.btnFilter: {
                 FilterKindsActivity.year = getCurrentYear();
                 Intent intent = new Intent(this, FilterKindsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break; }
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            Cursor oldCursor = cursor;
+            stopManagingCursor(oldCursor);
+            cursor = getCursor();
+            startManagingCursor(cursor);
+            scAdapter.changeCursor(cursor);
+            oldCursor.close();
+        } else {
+            Toast.makeText(this, "Wrong result", Toast.LENGTH_SHORT).show();
         }
     }
 
