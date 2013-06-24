@@ -41,9 +41,10 @@ public class BillsByYearMonthKindsActivity extends BillsByXActivity {
         return R.layout.bills_by_kind_item;
     }
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        btnFilter.setText("+");
         cursor.moveToFirst();
         float tmpMaxSum = 0;
         do {
@@ -53,6 +54,7 @@ public class BillsByYearMonthKindsActivity extends BillsByXActivity {
         mMaxSum = tmpMaxSum;
     }
 
+    @Override
     protected Cursor getCursor() {
         return db.getDataByYearMonthKinds(year, month);
     }
@@ -84,6 +86,7 @@ public class BillsByYearMonthKindsActivity extends BillsByXActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnFilter: {
+                btnFilter.setText("...");
                 BillActivity.editMode = 0;
                 Intent intent = new Intent(this, BillActivity.class);
                 startActivity(intent);
@@ -91,7 +94,7 @@ public class BillsByYearMonthKindsActivity extends BillsByXActivity {
                 BillActivity.billDto.payDate = new Date();
                 BillActivity.billDto.kind = "";
                 BillActivity.billDto.description = "";
-                startActivityForResult(intent, 1);
+                startActivity(intent);
                 break; }
         }
 

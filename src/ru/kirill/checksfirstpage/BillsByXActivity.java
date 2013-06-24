@@ -40,7 +40,7 @@ public abstract class BillsByXActivity extends Activity implements View.OnClickL
         tv.setText(getHeaderText());
 
         btnFilter = (Button) findViewById(R.id.btnFilter);
-
+        btnFilter.setText("...");
         btnFilter.setOnClickListener(this);
 
         db = new Db(this);
