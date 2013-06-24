@@ -26,11 +26,13 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 
 	ListView lvKinds;
 	Button btnSaveKind;
-	ArrayList<Map<String, Object>> kinds;
-	String[] expTypes = {"обед", "бензин", "еда", "одежда"};
+//	ArrayList<Map<String, Object>> kinds;
+//	String[] expTypes = {"обед", "бензин", "еда", "одежда"};
     private Db db;
     private static final int CM_DELETE_ID = 1;
     private static final int CM_EDIT_ID = 2;
+    private static final int CM_MOVE_UP_ID = 3;
+    private static final int CM_MOVE_DOWN_ID = 4;
     SimpleCursorAdapter scAdapter;
     Cursor cursor;
     public static int editMode = 0; //0 - добавление, 1 - редактирование
@@ -53,14 +55,14 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 		btnSaveKind.setOnClickListener(this);
 
 		// упаковываем данные в понятную для адаптера структуру
-		kinds = new ArrayList<Map<String, Object>>(
-				expTypes.length);
-
-		for (int i = 0; i < expTypes.length; i++) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put(ATTRIBUTE_NAME_TEXT, expTypes[i]);
-			kinds.add(map);
-		}
+//		kinds = new ArrayList<Map<String, Object>>(
+//				expTypes.length);
+//
+//		for (int i = 0; i < expTypes.length; i++) {
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put(ATTRIBUTE_NAME_TEXT, expTypes[i]);
+//			kinds.add(map);
+//		}
 		
 		// массив имен атрибутов, из которых будут читаться данные
 	    String[] from = { "name" };
@@ -90,6 +92,8 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
 		super.onCreateContextMenu(menu, v, menuInfo);
         menu.add(0, CM_DELETE_ID, 0, R.string.delete_record);
         menu.add(0, CM_EDIT_ID, 0, R.string.edit_record);
+        menu.add(0, CM_MOVE_UP_ID, 0, R.string.move_record_up);
+        menu.add(0, CM_MOVE_DOWN_ID, 0, R.string.move_record_down);
 	}
 
 	public boolean onContextItemSelected(MenuItem item) {
@@ -118,10 +122,69 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
             // когда текущее активити станет опять станет активным
             // cursor.requery();
             return true;
+        } else if (item.getItemId() == CM_MOVE_DOWN_ID || item.getItemId() == CM_MOVE_UP_ID) {
+
+            AdapterView.AdapterContextMenuInfo acmi = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            long id = acmi.id;
+            KindDto currentKind = db.getKind(id);
+            int fieldId_Index = cursor.getColumnIndex("_id");
+
+            if (item.getItemId() == CM_MOVE_DOWN_ID) {
+                // получаем из пункта контекстного меню данные по пункту списка
+
+                cursor.moveToLast();
+                long nextId = -1;
+                do {
+                    long _id = cursor.getInt(fieldId_Index);
+                    String sId = ""+_id;
+                    if(currentKind.id.equals(sId)) {
+                        break;
+                    }
+                    nextId = cursor.getInt(fieldId_Index);
+                } while (cursor.moveToPrevious());
+
+                swapKindPosition(currentKind, nextId);
+                return true;
+            } else if (item.getItemId() == CM_MOVE_UP_ID) {
+                // получаем из пункта контекстного меню данные по пункту списка
+
+                cursor.moveToFirst();
+                long prevId = -1;
+                do {
+                    long _id = cursor.getInt(fieldId_Index);
+                    String sId = ""+_id;
+                    if(currentKind.id.equals(sId)) {
+                        break;
+                    }
+                    prevId = cursor.getInt(fieldId_Index);
+                } while (cursor.moveToNext());
+
+                swapKindPosition(currentKind, prevId);
+                return true;
+            }
         }
 		return super.onContextItemSelected(item);
 	}
-	@Override
+
+    private void swapKindPosition(KindDto currentKind, long swapKind_Id) {
+        if(swapKind_Id != -1 && ! currentKind.id.equals(""+swapKind_Id) ) {
+            KindDto nextKind = db.getKind(swapKind_Id);
+            int swapPosition = nextKind.position;
+            nextKind.position = currentKind.position;
+            currentKind.position = swapPosition;
+            db.beginTransaction();
+            try {
+                db.editKind(nextKind);
+                db.editKind(currentKind);
+                db.transactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+            cursor.requery();
+        }
+    }
+
+    @Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
@@ -156,6 +219,7 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
             }
             Toast.makeText(this, "Проверка прошла успешно", Toast.LENGTH_SHORT);
                     if (editMode == 0) {
+                        kindDto.position = 1 + db.getMaxKindPosition();
                         db.insertKind(kindDto);
                         сlearKindDto(etNewKind);
                         Toast.makeText(this, "Элемент добавлен", Toast.LENGTH_SHORT);

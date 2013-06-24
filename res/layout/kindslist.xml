@@ -4,39 +4,54 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tvNewKind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:paddingTop="10dip"
-        android:text="Введите новый вид покупок" />
-
-    <EditText
-        android:id="@+id/etNewKind"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dip"
-        android:layout_marginBottom="15dip"
-        android:ems="10"
-        android:singleLine="true" >
+        android:layout_height="wrap_content">
 
-        <requestFocus />
-    </EditText>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="20"
+            >
 
-    <Button
-        android:id="@+id/btnSaveKind"
-        android:layout_width="288dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_margin="10dip"
-        android:text="Сохранить" />
+            <TextView
+                android:id="@+id/tvNewKind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:paddingTop="10dip"
+                android:text="Введите новый вид покупок" />
+
+            <EditText
+                android:id="@+id/etNewKind"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:layout_marginBottom="5dip"
+                android:ems="10"
+                android:singleLine="true"
+                android:layout_weight="3">
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSaveKind"
+            android:layout_width="120dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical|bottom|right"
+            android:layout_margin="5dip"
+            android:text="Сохранить"
+            android:layout_weight="5"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lvKinds"
         android:layout_width="match_parent"
-        android:layout_height="263dp" >
+        android:layout_height="fill_parent" >
     </ListView>
 
 </LinearLayout>

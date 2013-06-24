@@ -18,10 +18,11 @@
             android:textStyle="bold"
             android:typeface="sans"
             />
+
     <ListView
             android:id="@+id/lvData"
             android:layout_width="fill_parent"
-            android:layout_height="379dp"
+            android:layout_height="fill_parent"
             android:clickable="true"
             android:duplicateParentState="false"
             android:fastScrollEnabled="true"
@@ -30,19 +31,22 @@
             android:footerDividersEnabled="true"
             android:headerDividersEnabled="true"
             android:longClickable="true"
-            android:visibility="visible" >
+            android:visibility="visible"
+            android:layout_gravity="top"
+            android:layout_weight="1">
 
     </ListView>
 
     <Button
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:text="Применить"
             android:id="@+id/btnFilterUse"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_margin="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="2"
+            android:height="250dp"/>
 
 
 </LinearLayout>
