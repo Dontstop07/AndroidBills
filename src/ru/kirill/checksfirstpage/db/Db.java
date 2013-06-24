@@ -99,6 +99,7 @@ public class Db {
             //result.payDate = cursor.getString(cursor.getColumnIndex("pay_date"));
             fillBillFields(cursor, result);
         }
+        cursor.close();
         return result;
     }
 
