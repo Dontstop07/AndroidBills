@@ -169,6 +169,18 @@ public class KindsListActivityDb extends Activity implements OnClickListener  {
     private void swapKindPosition(KindDto currentKind, long swapKind_Id) {
         if(swapKind_Id != -1 && ! currentKind.id.equals(""+swapKind_Id) ) {
             KindDto nextKind = db.getKind(swapKind_Id);
+            if(nextKind.position == currentKind.position) {
+                // Перенумеруем прозиции
+                db.kindsInitPositions();
+
+                // Загрузим новые позиции
+                KindDto tmpDto = db.getKind(Long.parseLong(currentKind.id));
+                currentKind.position = tmpDto.position;
+
+                tmpDto = db.getKind(swapKind_Id);
+                nextKind.position = tmpDto.position;
+            }
+
             int swapPosition = nextKind.position;
             nextKind.position = currentKind.position;
             currentKind.position = swapPosition;
