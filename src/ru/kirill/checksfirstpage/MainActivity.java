@@ -87,7 +87,6 @@ public class MainActivity extends Activity implements OnClickListener {
                 break;
             }
             case R.id.btnBillsByYear: {
-                // кнопка Получить чеки
                 Intent intent = new Intent(this,BillsByYearActivity.class);
                 startActivity(intent);
                 break;

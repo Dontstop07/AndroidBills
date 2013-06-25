@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="delete_record">Удалить запись</string>
     <string name="edit_record">Редактировать запись</string>
+    <string name="move_record_up">Вверх</string>
+    <string name="move_record_down">Вниз</string>
 
 </resources>

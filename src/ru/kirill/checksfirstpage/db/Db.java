@@ -2,7 +2,6 @@
 
 package ru.kirill.checksfirstpage.db;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +10,6 @@ import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import android.util.Log;
-import android.widget.Toast;
 import ru.kirill.checksfirstpage.dto.BillDto;
 import ru.kirill.checksfirstpage.dto.KindDto;
 
@@ -34,7 +32,7 @@ public class Db {
     public static final String COLUMN_EXP_IMP = "exp_imp";
     private final Context ctx;
     private DBHelper dbHelper;
-    private final int DB_VERSION = 4;
+    private final int DB_VERSION = 6;
     private final String DB_NAME = "myDb";
     private SQLiteDatabase mDb;
     public static String[] selectedKinds;
@@ -78,12 +76,13 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("bills", null, where, whereParamaters, null, null, null);
+        BillDto result = null;
         if(cursor.moveToNext() ) {
-            BillDto result = new BillDto();
+            result = new BillDto();
             fillBillFields(cursor, result);
-            return result;
         }
-        return null;
+        cursor.close();
+        return result;
     }
 
     public BillDto get(long id) {
@@ -92,13 +91,14 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("bills", null, where, whereParamaters, null, null, "pay_date, cash");
+        BillDto result = null;
         if(cursor.moveToNext() ) {
-            BillDto result = new BillDto();
+            result = new BillDto();
             //result.payDate = cursor.getString(cursor.getColumnIndex("pay_date"));
             fillBillFields(cursor, result);
-            return result;
         }
-        return null;
+        cursor.close();
+        return result;
     }
 
     private String getField(Cursor cursor, String fieldName) {
@@ -207,18 +207,19 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("kinds", null, where, whereParamaters, null, null, "name");
+        KindDto result = null;
         if(cursor.moveToNext() ) {
-            KindDto result = new KindDto();
+            result = new KindDto();
             result.id = getField(cursor, "_id");
             result.name = getField(cursor, "name");
-            return result;
+            result.position = getFieldInt(cursor, "position");
         }
-        return null;
+        cursor.close();
+        return result;
     }
 
     //сохранить запись
     public void editKind(KindDto kindDto) {
-        // TODO Auto-generated method stub
         mDb.update("kinds", getKindFilledContentValues(kindDto), "_id=?", new String[] {kindDto.id});
     }
 
@@ -231,7 +232,7 @@ public class Db {
 
 
     public Cursor getAllKindData() {
-        return mDb.query("kinds", null, null, null, null, null, "name");
+        return mDb.query("kinds", null, null, null, null, null, "position, name");
     }
 
     public KindDto getKindByName(String name) {
@@ -241,15 +242,9 @@ public class Db {
         // вместо "вопросика" будет использовано
         // значение находящееся в массиве whereParamaters
         Cursor cursor = mDb.query("kinds", null, where, whereParamaters, null, null, "name");
-        return extractKindDto(cursor);
-       /* Cursor cursor = mDb.query("kinds", null, null, null, null, null, "name");
-        cursor.moveToFirst();
-        do {
-            (cursor.moveToNext() )
-            KindDto result = new KindDto();
-            result.name = getField(cursor, "name");
-        }*/
-
+        KindDto result = extractKindDto(cursor);
+        cursor.close();
+        return result;
     }
 
     private KindDto extractKindDto(Cursor cursor) {
@@ -265,6 +260,7 @@ public class Db {
     private ContentValues getKindFilledContentValues(KindDto dto) {
         ContentValues cv = new ContentValues();
         cv.put("name", dto.name);
+        cv.put("position", ""+dto.position);
         return cv;
     }
 
@@ -349,6 +345,16 @@ public class Db {
         }
     }
 
+    public int getMaxKindPosition() {
+        Cursor cursor = mDb.rawQuery("select max(position) from kinds", null);
+        int result = 0;
+        if(cursor.moveToFirst()) {
+            result = cursor.getInt(0);
+        }
+        cursor.close();
+        return result;
+    }
+
     private class DBHelper extends SQLiteOpenHelper {
         public DBHelper(Context ctx, String dbName, SQLiteDatabase.CursorFactory cursorFactory, int dbVersion)  {
             super(ctx, dbName, cursorFactory, dbVersion);
@@ -378,14 +384,29 @@ public class Db {
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-            if (oldVersion == 1 && newVersion == 2) {
+            if (oldVersion == 1 && newVersion >= 2) {
                 createKinds(sqLiteDatabase);
+                oldVersion++;
             }
-            if (oldVersion == 2 && newVersion == 3) {
+
+            if (oldVersion == 2 && newVersion >= 3) {
                 billsAddExpImp(sqLiteDatabase);
+                oldVersion++;
             }
-            if (oldVersion == 3 && newVersion == 4) {
+
+            if (oldVersion == 3 && newVersion >= 4) {
                 billsAddExpImp(sqLiteDatabase);
+                oldVersion++;
+            }
+
+            if (oldVersion == 4 && newVersion >= 5) {
+                kindsAddPosition(sqLiteDatabase);
+                oldVersion++;
+            }
+
+            if (oldVersion == 5 && newVersion >= 6) {
+                kindsUpdatePositionsOnUpgrade(sqLiteDatabase);
+                oldVersion++;
             }
         }
 
@@ -395,10 +416,42 @@ public class Db {
                             + " add  "
                             + " exp_imp decimal(1) default 0"
                             + "; ";
-            try {
+            sqLiteDatabase.beginTransaction();
+            try{
                 sqLiteDatabase.execSQL(DB_DDL);
-            } catch (Exception ex) {
-                Log.e("", ex.toString());
+                sqLiteDatabase.setTransactionSuccessful();
+            } catch (Exception nothing) {
+            } finally {
+                sqLiteDatabase.endTransaction();
+            }
+        }
+
+        private void kindsAddPosition(SQLiteDatabase sqLiteDatabase) {
+            String DB_DDL =
+                    " ALTER TABLE kinds "
+                            + " add  "
+                            + " position DECIMAL(5) NOT NULL DEFAULT 0"
+                            + "; ";
+            sqLiteDatabase.beginTransaction();
+            try{
+                sqLiteDatabase.execSQL(DB_DDL);
+                sqLiteDatabase.setTransactionSuccessful();
+            } catch (Exception nothing) {
+            } finally {
+                sqLiteDatabase.endTransaction();
+            }
+        }
+
+        private void kindsUpdatePositionsOnUpgrade(SQLiteDatabase sqLiteDatabase) {
+            sqLiteDatabase.beginTransaction();
+
+            try{
+                kindsInitPositions(sqLiteDatabase);
+                sqLiteDatabase.setTransactionSuccessful();
+            } catch (Exception nothing) {
+                Log.d("DB", nothing.toString());
+            } finally {
+                sqLiteDatabase.endTransaction();
             }
         }
 
@@ -406,11 +459,41 @@ public class Db {
             String DB_DDL =
                     " CREATE TABLE kinds ( "
                             + " _id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                            + " name VARCHAR(250) NOT NULL DEFAULT '' "
+                            + " name VARCHAR(250) NOT NULL DEFAULT '', "
+                            + " position DECIMAL(5) NOT NULL DEFAULT 0"
                             + "); ";
             sqLiteDatabase.execSQL(DB_DDL);
         }
     }
 
+    private static void kindsInitPositions(SQLiteDatabase sqLiteDatabase) {
+        Cursor cursor = sqLiteDatabase.query("kinds", null, null, null, null, null, "position, name");
 
+        int i = 1;
+        int fIdIdx = cursor.getColumnIndex("_id");
+        cursor.moveToFirst();
+        String[] params = new String[2];
+        final String SQL = " update kinds "
+                + " set position = ?"
+                + " where _id = ? ";
+        do {
+            params[0] = ""+ i;
+            params[1] = cursor.getString(fIdIdx);
+            i++;
+            sqLiteDatabase.execSQL(SQL, params);
+        } while(cursor.moveToNext());
+    }
+
+    public void kindsInitPositions() {
+        mDb.beginTransaction();
+
+        try{
+            kindsInitPositions(mDb);
+            mDb.setTransactionSuccessful();
+        } catch (Exception nothing) {
+            Log.d("DB", nothing.toString());
+        } finally {
+            mDb.endTransaction();
+        }
+    }
 }

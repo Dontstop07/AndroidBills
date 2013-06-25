@@ -2,4 +2,5 @@ bin
 gen
 .settings
 out
-/.idea/workspace.xml
+
+/.idea
