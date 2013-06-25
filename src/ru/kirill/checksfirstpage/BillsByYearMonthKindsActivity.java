@@ -86,17 +86,14 @@ public class BillsByYearMonthKindsActivity extends BillsByXActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnFilter: {
-                BillActivity.editMode = 0;
-                BillActivity.billDto.cash = "";
-                BillActivity.billDto.payDate = new Date();
-                BillActivity.billDto.kind = "";
-                BillActivity.billDto.description = "";
-                Intent intent = new Intent(this, BillActivity.class);
+                Intent intent = BillActivity.getIntentForInputNew(this);
                 startActivity(intent);
                 break; }
         }
 
     }
+
+
 
 }
 

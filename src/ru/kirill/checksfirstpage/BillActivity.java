@@ -6,7 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.Gravity;
 import ru.kirill.checksfirstpage.db.Db;
@@ -230,6 +232,14 @@ public class BillActivity extends Activity implements OnClickListener {
 
 	}
 
+    public static Intent getIntentForInputNew(Context ctx) {
+            BillActivity.editMode = 0;
+            BillActivity.billDto.cash = "";
+            BillActivity.billDto.payDate = new Date();
+            BillActivity.billDto.kind = "";
+            BillActivity.billDto.description = "";
+            return new Intent(ctx, BillActivity.class);
+    }
 }
 
 

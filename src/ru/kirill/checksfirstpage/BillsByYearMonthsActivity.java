@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import ru.kirill.checksfirstpage.db.Db;
+import ru.kirill.checksfirstpage.util.Helper;
 
 /**
  * Created by K on 11.06.13.
@@ -55,9 +56,15 @@ public class BillsByYearMonthsActivity extends BillsByXActivity {
 
     @Override
     protected void onBindView(View view, Context context, Cursor cursor) {
+
         ProgressBar pBar = (ProgressBar) view.findViewById(R.id.progressBar);
         pBar.setMax((int) mMaxSum);
         pBar.setProgress((int) cursor.getFloat(mIdxCash));
+    }
+
+    @Override
+    protected String getKindText(Cursor cursor) {
+        return Helper.getMonthName(cursor.getInt(mIdxCaption));
     }
 
     @Override
