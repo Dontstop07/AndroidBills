@@ -44,7 +44,6 @@ public class BillsByYearMonthKindsActivity extends BillsByXActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        btnFilter.setText("+");
         cursor.moveToFirst();
         float tmpMaxSum = 0;
         do {
@@ -61,6 +60,7 @@ public class BillsByYearMonthKindsActivity extends BillsByXActivity {
 
     @Override
     protected void onBindView(View view, Context context, Cursor cursor) {
+        btnFilter.setText("+");
         ProgressBar pBar = (ProgressBar) view.findViewById(R.id.progressBar);
         pBar.setMax((int) mMaxSum);
         pBar.setProgress((int) cursor.getFloat(mIdxCash));
@@ -86,14 +86,12 @@ public class BillsByYearMonthKindsActivity extends BillsByXActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnFilter: {
-                btnFilter.setText("...");
                 BillActivity.editMode = 0;
-                Intent intent = new Intent(this, BillActivity.class);
-                startActivity(intent);
                 BillActivity.billDto.cash = "";
                 BillActivity.billDto.payDate = new Date();
                 BillActivity.billDto.kind = "";
                 BillActivity.billDto.description = "";
+                Intent intent = new Intent(this, BillActivity.class);
                 startActivity(intent);
                 break; }
         }

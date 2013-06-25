@@ -18,8 +18,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85a61276-00ae-44af-9d3a-78178fc64bb3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByXActivity.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByXActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByYearMonthKindsActivity.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByYearMonthKindsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" afterPath="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ChecksMainPage.iws" />
@@ -80,7 +80,7 @@
       </breakpoint>
     </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" line="72" class="ru.kirill.checksfirstpage.MainActivity" package="ru.kirill.checksfirstpage">
+      <breakpoint url="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" line="70" class="ru.kirill.checksfirstpage.MainActivity" package="ru.kirill.checksfirstpage">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -259,7 +259,7 @@
       <file leaf-file-name="BillsByXActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByXActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="8" selection-start="1239" selection-end="1264" vertical-scroll-proportion="0.0" vertical-offset="236" max-vertical-offset="2278">
+            <state line="42" column="33" selection-start="1264" selection-end="1264" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="2278">
               <folding />
             </state>
           </provider>
@@ -268,16 +268,7 @@
       <file leaf-file-name="BillsByYearMonthsActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByYearMonthsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="4" selection-start="810" selection-end="819" vertical-scroll-proportion="0.0" vertical-offset="325" max-vertical-offset="1173">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FilterKindsActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/FilterKindsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="64" selection-start="3397" selection-end="3397" vertical-scroll-proportion="0.0" vertical-offset="1615" max-vertical-offset="1836">
+            <state line="37" column="4" selection-start="810" selection-end="819" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="1394">
               <folding />
             </state>
           </provider>
@@ -286,7 +277,16 @@
       <file leaf-file-name="Db.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="310" column="45" selection-start="10721" selection-end="10721" vertical-scroll-proportion="0.0" vertical-offset="5253" max-vertical-offset="7174">
+            <state line="310" column="45" selection-start="10721" selection-end="10721" vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="6885">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BillActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="213" column="36" selection-start="6541" selection-end="6541" vertical-scroll-proportion="0.0" vertical-offset="2627" max-vertical-offset="3587">
               <folding />
             </state>
           </provider>
@@ -295,7 +295,7 @@
       <file leaf-file-name="BillsByYearMonthKindsActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByYearMonthKindsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="28" selection-start="1222" selection-end="1222" vertical-scroll-proportion="0.4807198" vertical-offset="255" max-vertical-offset="1547">
+            <state line="86" column="28" selection-start="2381" selection-end="2381" vertical-scroll-proportion="0.3469388" vertical-offset="986" max-vertical-offset="1513">
               <folding />
             </state>
           </provider>
@@ -304,7 +304,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="54" selection-start="1674" selection-end="2019" vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1802">
+            <state line="56" column="0" selection-start="1657" selection-end="1657" vertical-scroll-proportion="0.0" vertical-offset="696" max-vertical-offset="1768">
               <folding />
             </state>
           </provider>
@@ -337,7 +337,7 @@
       <file leaf-file-name="bills_by_year.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/bills_by_year.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="45" selection-start="1083" selection-end="1083" vertical-scroll-proportion="-8.16" vertical-offset="255" max-vertical-offset="1071">
+            <state line="27" column="45" selection-start="1083" selection-end="1083" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="1071">
               <folding />
             </state>
           </provider>
@@ -349,7 +349,7 @@
       <file leaf-file-name="BillsByYearActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByYearActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="0" selection-start="908" selection-end="908" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
+            <state line="36" column="0" selection-start="908" selection-end="908" vertical-scroll-proportion="0.0" vertical-offset="595" max-vertical-offset="986">
               <folding />
             </state>
           </provider>
@@ -377,7 +377,6 @@
         <option value="$PROJECT_DIR$/res/layout/bills_by_kind_item.xml" />
         <option value="$PROJECT_DIR$/res/layout/act_db_content.xml" />
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/DbContentActivity.java" />
-        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java" />
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/mail/MailPartsCreator.java" />
         <option value="$PROJECT_DIR$/res/layout/bills_by_year.xml" />
@@ -389,14 +388,15 @@
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/FilterKindsActivity.java" />
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByXActivity.java" />
         <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByYearMonthKindsActivity.java" />
+        <option value="$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1378" />
-    <option name="height" value="780" />
+    <option name="width" value="1382" />
+    <option name="height" value="784" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -578,21 +578,21 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="133" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="151" />
     <property name="OverrideImplement.combined" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="151" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="155" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../P0431SimpleListChoice/res/layout/main.xml" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="157" />
@@ -608,8 +608,8 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
@@ -832,13 +832,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1378" height="780" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32613552" sideWeight="0.6012759" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32613552" sideWeight="0.6012759" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.67623603" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3130016" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -851,9 +850,10 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67623603" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20668693" sideWeight="0.6661316" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33386838" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2090909" sideWeight="0.6666667" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.67623603" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -873,18 +873,18 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3141946" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33014354" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67623603" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23748103" sideWeight="0.67623603" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32376397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -955,21 +955,12 @@
     </entry>
     <entry file="jar://$PROJECT_DIR$/../../android-sdk-windows/platforms/android-17/android.jar!/android/view/View.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="910" column="19" selection-start="40897" selection-end="40897" vertical-scroll-proportion="0.0" vertical-offset="15323" max-vertical-offset="19482">
-          <folding />
-        </state>
+        <state line="910" column="19" selection-start="40897" selection-end="40897" vertical-scroll-proportion="0.0" vertical-offset="15323" max-vertical-offset="19482" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/DbContentActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="175" column="50" selection-start="7495" selection-end="7495" vertical-scroll-proportion="0.0" vertical-offset="2958" max-vertical-offset="3434">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="219" column="52" selection-start="6825" selection-end="6825" vertical-scroll-proportion="0.0" vertical-offset="2994" max-vertical-offset="3587">
           <folding />
         </state>
       </provider>
@@ -983,21 +974,12 @@
     </entry>
     <entry file="jar://$PROJECT_DIR$/../../android-sdk-windows/platforms/android-17/android.jar!/android/app/Activity.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="34" selection-start="4007" selection-end="4025" vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="7429">
-          <folding />
-        </state>
+        <state line="107" column="34" selection-start="4007" selection-end="4025" vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="7429" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/FilterKindsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="96" column="64" selection-start="3397" selection-end="3397" vertical-scroll-proportion="0.0" vertical-offset="984" max-vertical-offset="1581">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="310" column="45" selection-start="10721" selection-end="10721" vertical-scroll-proportion="0.0" vertical-offset="4964" max-vertical-offset="6885">
           <folding />
         </state>
       </provider>
@@ -1019,16 +1001,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="54" selection-start="1674" selection-end="2019" vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1802">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/bills_by_year.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="45" selection-start="1083" selection-end="1083" vertical-scroll-proportion="-8.16" vertical-offset="255" max-vertical-offset="1071">
+        <state line="27" column="45" selection-start="1083" selection-end="1083" vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="1071">
           <folding />
         </state>
       </provider>
@@ -1055,14 +1030,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByXActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="8" selection-start="1239" selection-end="1264" vertical-scroll-proportion="0.0" vertical-offset="236" max-vertical-offset="2278">
+        <state line="42" column="33" selection-start="1264" selection-end="1264" vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="2278">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/db/Db.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="310" column="45" selection-start="10721" selection-end="10721" vertical-scroll-proportion="0.0" vertical-offset="4964" max-vertical-offset="6885">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="36" selection-start="6541" selection-end="6541" vertical-scroll-proportion="0.0" vertical-offset="3035" max-vertical-offset="3587">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="0" selection-start="1657" selection-end="1657" vertical-scroll-proportion="0.0" vertical-offset="696" max-vertical-offset="1768">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/kirill/checksfirstpage/BillsByYearMonthKindsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="28" selection-start="1222" selection-end="1222" vertical-scroll-proportion="0.4807198" vertical-offset="255" max-vertical-offset="1547">
+        <state line="86" column="28" selection-start="2381" selection-end="2381" vertical-scroll-proportion="0.3469388" vertical-offset="986" max-vertical-offset="1513">
           <folding />
         </state>
       </provider>
