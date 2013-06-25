@@ -2,7 +2,6 @@
 
 package ru.kirill.checksfirstpage.db;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +10,6 @@ import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import android.util.Log;
-import android.widget.Toast;
 import ru.kirill.checksfirstpage.dto.BillDto;
 import ru.kirill.checksfirstpage.dto.KindDto;
 
@@ -407,7 +405,7 @@ public class Db {
             }
 
             if (oldVersion == 5 && newVersion >= 6) {
-                kindsUpdatePositions(sqLiteDatabase);
+                kindsUpdatePositionsOnUpgrade(sqLiteDatabase);
                 oldVersion++;
             }
         }
@@ -444,25 +442,11 @@ public class Db {
             }
         }
 
-        private void kindsUpdatePositions(SQLiteDatabase sqLiteDatabase) {
+        private void kindsUpdatePositionsOnUpgrade(SQLiteDatabase sqLiteDatabase) {
             sqLiteDatabase.beginTransaction();
+
             try{
-                Cursor cursor = sqLiteDatabase.query("kinds", null, null, null, null, null, "position, name");
-
-                int i = 1;
-                int fIdIdx = cursor.getColumnIndex("_id");
-                cursor.moveToFirst();
-                String[] params = new String[2];
-                final String SQL = " update kinds "
-                        + " set position = ?"
-                        + " where _id = ? ";
-                do {
-                    params[0] = ""+ i;
-                    params[1] = cursor.getString(fIdIdx);
-                    i++;
-                    sqLiteDatabase.execSQL(SQL, params);
-                } while(cursor.moveToNext());
-
+                kindsInitPositions(sqLiteDatabase);
                 sqLiteDatabase.setTransactionSuccessful();
             } catch (Exception nothing) {
                 Log.d("DB", nothing.toString());
@@ -479,6 +463,37 @@ public class Db {
                             + " position DECIMAL(5) NOT NULL DEFAULT 0"
                             + "); ";
             sqLiteDatabase.execSQL(DB_DDL);
+        }
+    }
+
+    private static void kindsInitPositions(SQLiteDatabase sqLiteDatabase) {
+        Cursor cursor = sqLiteDatabase.query("kinds", null, null, null, null, null, "position, name");
+
+        int i = 1;
+        int fIdIdx = cursor.getColumnIndex("_id");
+        cursor.moveToFirst();
+        String[] params = new String[2];
+        final String SQL = " update kinds "
+                + " set position = ?"
+                + " where _id = ? ";
+        do {
+            params[0] = ""+ i;
+            params[1] = cursor.getString(fIdIdx);
+            i++;
+            sqLiteDatabase.execSQL(SQL, params);
+        } while(cursor.moveToNext());
+    }
+
+    public void kindsInitPositions() {
+        mDb.beginTransaction();
+
+        try{
+            kindsInitPositions(mDb);
+            mDb.setTransactionSuccessful();
+        } catch (Exception nothing) {
+            Log.d("DB", nothing.toString());
+        } finally {
+            mDb.endTransaction();
         }
     }
 }
