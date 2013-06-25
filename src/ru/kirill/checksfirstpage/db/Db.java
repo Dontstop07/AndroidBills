@@ -214,6 +214,7 @@ public class Db {
             result = new KindDto();
             result.id = getField(cursor, "_id");
             result.name = getField(cursor, "name");
+            result.position = getFieldInt(cursor, "position");
         }
         cursor.close();
         return result;
