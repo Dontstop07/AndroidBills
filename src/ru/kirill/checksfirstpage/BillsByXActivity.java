@@ -83,7 +83,7 @@ public abstract class BillsByXActivity extends Activity implements View.OnClickL
                 vCash.setText(df.format(cursor.getFloat(mIdxCash)));
 
                 TextView vKind = (TextView) view.findViewById(R.id.tvItemCaption);
-                vKind.setText(cursor.getString(mIdxCaption));
+                vKind.setText(getKindText(cursor));
 
              onBindView(view, context, cursor);
             }
@@ -100,6 +100,10 @@ public abstract class BillsByXActivity extends Activity implements View.OnClickL
 
             }
         });
+    }
+
+    protected String getKindText(Cursor cursor) {
+        return cursor.getString(mIdxCaption);
     }
 
     protected abstract int getRecordItemLayout();
